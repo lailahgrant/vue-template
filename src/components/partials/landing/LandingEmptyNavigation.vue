@@ -110,6 +110,13 @@ watchEffect(() => {
             rounded
             raised
           >
+          <!-- Hassan mmade this edit for me to show me how  to makke redirects on a link or router
+            <VButton
+            :to="{ name: 'auth-login', query: { redirect: '/auth/signup' } }"
+            color="primary"
+            rounded
+            raised
+          > -->
             <strong>Sign up</strong>
           </VButton>
         </div>
