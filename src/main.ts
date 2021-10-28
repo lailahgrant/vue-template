@@ -13,6 +13,9 @@
 
 import { createApp } from './app'
 
+// import firebase.js file
+import './firebase'
+
 /**
  * We create our app and mount it when it is ready
  *

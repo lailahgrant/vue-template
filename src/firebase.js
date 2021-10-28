@@ -29,3 +29,4 @@ const config = {
     appId: '1:734742842355:web:adb7136333e26343162086',
     measurementId: 'G-K3LWRJCLFJ',
 }
+
