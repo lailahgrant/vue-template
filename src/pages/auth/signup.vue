@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -11,7 +10,7 @@ import { isDark, toggleDarkModeHandler } from '/@src/state/darkModeState'
 import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
 
-import { createUser } from '../../src/firebase.js'
+import { createUser } from '/@src/firebase'
 import { reactive } from 'vue'
 
 const router = useRouter()
@@ -38,9 +37,8 @@ const schema = yup.object({
     .oneOf([yup.ref('password')], t('auth.errors.passwordCheck.match')),
 })
 
-
-    // setup(){
-const form = reactive({ name: '',   email: '',  pass: '' })
+// setup(){
+const form = reactive({ name: '', email: '', pass: '' })
 
 const handleSignup = async (values: typeof schema) => {
   console.log('handleSignup values')
@@ -48,10 +46,8 @@ const handleSignup = async (values: typeof schema) => {
 
   await createUser({ ...form })
 
-        router.push('./login')
-        form.name = ''
-        form.email = ''
-        form.pass = ''
+  // router.push('./login')
+  
 
   if (!isLoading.value) {
     isLoading.value = true
@@ -59,23 +55,24 @@ const handleSignup = async (values: typeof schema) => {
     await sleep(800)
 
     notif.dismissAll()
-    notif.success('Welcome, Erik Kovalsky')
+    notif.success(`Welcome, ${form.name}`)
 
-    router.push({ name: 'app' })
+    // router.push({ name: 'app' })
     isLoading.value = false
+
+    form.name = ''
+  form.email = ''
+  form.pass = ''
+  router.push({ name: 'auth-login' })
+
   }
-  
 }
 // return {form, handleSignup}
-// }  
- 
+// }
+
 useHead({
   title: 'Auth Signup 2 - Vuero',
 })
-
- 
-
-
 </script>
 
 <template>
@@ -105,7 +102,7 @@ useHead({
                 <div class="auth-content">
                   <h2>{{ t('auth.title') }}</h2>
                   <p>{{ t('auth.subtitle') }}</p>
-                  <RouterLink :to="{ name: 'auth-login-2' }">
+                  <RouterLink :to="{ name: 'auth-login' }">
                     {{ t('auth.action.login') }}
                   </RouterLink>
                 </div>
@@ -121,7 +118,7 @@ useHead({
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
-                            v-model="form.name"
+                              v-model="form.name"
                               v-bind="field"
                               class="input"
                               type="text"
@@ -143,13 +140,13 @@ useHead({
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
-                            v-model="form.email"
+                              v-model="form.email"
                               v-bind="field"
                               class="input"
                               type="email"
                               :placeholder="t('auth.placeholder.email')"
                               autocomplete="email"
-                          />
+                            />
                             <p v-if="errorMessage" class="help is-danger">
                               {{ errorMessage }}
                             </p>
@@ -276,36 +273,3 @@ useHead({
     </div>
   </div>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

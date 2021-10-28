@@ -104,7 +104,12 @@ watchEffect(() => {
           </RouterLink>
         </div>
         <div class="navbar-item">
-          <VButton :to="{ name: 'auth-signup' }" color="primary" rounded raised>
+          <VButton
+            :to="{ name: 'auth-login', query: { redirect: '/auth/signup' } }"
+            color="primary"
+            rounded
+            raised
+          >
             <strong>Sign up</strong>
           </VButton>
         </div>

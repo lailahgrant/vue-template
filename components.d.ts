@@ -148,7 +148,7 @@ declare module 'vue' {
     FlightResultsDropdown: typeof import('C:/Users/Lailah/Desktop/quickstarter-vuero-v2.1.0/src/components/partials/dropdowns/FlightResultsDropdown.vue')['default']
     FlightsDashboard: typeof import('C:/Users/Lailah/Desktop/quickstarter-vuero-v2.1.0/src/components/pages/dashboards/business/FlightsDashboard.vue')['default']
     FoodDeliveryApp: typeof import('./src/components/pages/apps/FoodDeliveryApp.vue')['default']
-    FormLayout: typeof import('./src/components/pages/forms/form-layout/FormLayout.vue')['default']
+    FormLayout: typeof import('C:/Users/Lailah/Desktop/quickstarter-vuero-v2.1.0/src/components/pages/FormLayout.vue')['default']
     FormLayoutSeparate: typeof import('./src/components/pages/forms/form-layout/FormLayoutSeparate.vue')['default']
     FormLayoutSplit: typeof import('./src/components/pages/forms/form-layout/FormLayoutSplit.vue')['default']
     FormLayoutStacked: typeof import('./src/components/pages/forms/form-layout/FormLayoutStacked.vue')['default']
