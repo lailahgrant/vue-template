@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
@@ -10,6 +11,8 @@ import { isDark, toggleDarkModeHandler } from '/@src/state/darkModeState'
 import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
 
+import { createUser } from '../../src/firebase.js'
+import { reactive } from 'vue'
 
 const router = useRouter()
 const notif = useNotyf()
@@ -35,9 +38,20 @@ const schema = yup.object({
     .oneOf([yup.ref('password')], t('auth.errors.passwordCheck.match')),
 })
 
+
+    // setup(){
+const form = reactive({ name: '',   email: '',  pass: '' })
+
 const handleSignup = async (values: typeof schema) => {
   console.log('handleSignup values')
   console.table(values)
+
+  await createUser({ ...form })
+
+        router.push('./login')
+        form.name = ''
+        form.email = ''
+        form.pass = ''
 
   if (!isLoading.value) {
     isLoading.value = true
@@ -50,11 +64,18 @@ const handleSignup = async (values: typeof schema) => {
     router.push({ name: 'app' })
     isLoading.value = false
   }
+  
 }
-
+// return {form, handleSignup}
+// }  
+ 
 useHead({
   title: 'Auth Signup 2 - Vuero',
 })
+
+ 
+
+
 </script>
 
 <template>
@@ -100,6 +121,7 @@ useHead({
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
+                            v-model="form.name"
                               v-bind="field"
                               class="input"
                               type="text"
@@ -121,12 +143,13 @@ useHead({
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
+                            v-model="form.email"
                               v-bind="field"
                               class="input"
-                              type="text"
+                              type="email"
                               :placeholder="t('auth.placeholder.email')"
                               autocomplete="email"
-                            />
+                          />
                             <p v-if="errorMessage" class="help is-danger">
                               {{ errorMessage }}
                             </p>
@@ -142,6 +165,7 @@ useHead({
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
+                              v-model="form.pass"
                               v-bind="field"
                               class="input"
                               type="password"
@@ -254,22 +278,7 @@ useHead({
 </template>
 
 
-<script>
-import { createUser } from '@/firebase'
-import { reactive } from 'vue'
 
-export default {
-    setup(){
-
-      const router = useRouter()
-
-      const form = reactive({
-        
-      })
-
-    }  
-}
-</script>
 
 
 
