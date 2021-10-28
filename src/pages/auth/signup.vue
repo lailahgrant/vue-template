@@ -10,6 +10,7 @@ import { isDark, toggleDarkModeHandler } from '/@src/state/darkModeState'
 import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
 
+
 const router = useRouter()
 const notif = useNotyf()
 
@@ -251,3 +252,51 @@ useHead({
     </div>
   </div>
 </template>
+
+
+<script>
+import { createUser } from '@/firebase'
+import { reactive } from 'vue'
+
+export default {
+    setup(){
+
+      const router = useRouter()
+
+      const form = reactive({
+        
+      })
+
+    }  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

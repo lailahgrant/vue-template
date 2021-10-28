@@ -21,13 +21,13 @@ import {
 } from 'firebase/auth'
 
 const config = {
-    apiKey: 'AIzaSyADgGKw5HIZjayWSY67nZXjMKX6xhvs4U8',
-    authDomain: 'vue-crud-1b171.firebaseapp.com',
-    projectId: 'vue-crud-1b171',
-    storageBucket: 'vue-crud-1b171.appspot.com',
-    messagingSenderId: '734742842355',
-    appId: '1:734742842355:web:adb7136333e26343162086',
-    measurementId: 'G-K3LWRJCLFJ',
+    apiKey: 'AIzaSyD_dJc7HgTIKgBy1KhMWsIbvOzJ6UjqXpw',
+    authDomain: 'freelance-app-f7696.firebaseapp.com',
+    projectId: 'freelance-app-f7696',
+    storageBucket: 'freelance-app-f7696.appspot.com',
+    messagingSenderId: '686332306013',
+    appId: '1:686332306013:web:84d210d3ae06d6b73ee3b4',
+    measurementId: 'G-2G5PBMD72G',
 }
 
 initializeApp(config)
