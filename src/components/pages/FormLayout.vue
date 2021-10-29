@@ -20,7 +20,7 @@ const isStuck = computed(() => {
       <div :class="[isStuck && 'is-stuck']" class="form-header stuck-header">
         <div class="form-header-inner">
           <div class="left">
-            <h3>Request a Demo</h3>
+            <h3>Fill in Correctly</h3>
           </div>
           <div class="right">
             <div class="buttons">
@@ -72,6 +72,53 @@ const isStuck = computed(() => {
                 </VControl>
               </VField>
             </div>
+            <div class="column is-6">
+              <v-date-picker v-model="date" color="green" trim-weeks>
+                <template #default="{ inputValue, inputEvents }">
+                  <VField>
+                    <label>Date of Birth</label>
+                    <VControl icon="feather:calendar">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Select a date"
+                        :value="inputValue"
+                        v-on="inputEvents"
+                      />
+                    </VControl>
+                  </VField>
+                </template>
+              </v-date-picker>
+            </div>
+            <div class="column is-6">
+              <VField>
+                <label>Profession</label>
+                <VControl>
+                  <Multiselect
+                    v-model="companySize"
+                    placeholder="Select your profession"
+                    :options="[
+                      'Web Developer',
+                      'Android Developer',
+                      'iOS Developer',
+                      'Wordpress',
+                      'Data Scientist',
+                      'Other',
+                    ]"
+                  />
+                </VControl>
+              </VField>
+            </div>
+          </div>
+        </div>
+        <!--Fieldset-->
+        <div class="form-fieldset">
+          <div class="fieldset-heading">
+            <h4>Contact Info</h4>
+            <p>How can we reach you?</p>
+          </div>
+
+          <div class="columns is-multiline">
             <div class="column is-12">
               <VField>
                 <label>Email Address</label>
@@ -86,32 +133,28 @@ const isStuck = computed(() => {
                 </VControl>
               </VField>
             </div>
-          </div>
-        </div>
-        <!--Fieldset-->
-        <div class="form-fieldset">
-          <div class="fieldset-heading">
-            <h4>Company Info</h4>
-            <p>Tell us about your company</p>
-          </div>
-
-          <div class="columns is-multiline">
             <div class="column is-6">
               <VField>
-                <label>Company Name</label>
-                <VControl icon="feather:briefcase">
-                  <input
-                    type="text"
-                    class="input"
-                    placeholder=""
-                    autocomplete="organization"
+                <label>Country</label>
+                <VControl>
+                  <Multiselect
+                    v-model="businessType"
+                    placeholder="Select a type"
+                    :options="[
+                      'Uganda',
+                      'Kenya',
+                      'Tanzania',
+                      'Rwanda',
+                      'DR Congo',
+                      'South Sudan',
+                    ]"
                   />
                 </VControl>
               </VField>
             </div>
             <div class="column is-6">
               <VField>
-                <label>Company Phone</label>
+                <label>Contact / Phone Number</label>
                 <VControl icon="feather:phone">
                   <input
                     type="tel"
@@ -123,52 +166,21 @@ const isStuck = computed(() => {
                 </VControl>
               </VField>
             </div>
+            
             <div class="column is-6">
               <VField>
-                <label>Company Size</label>
-                <VControl>
-                  <Multiselect
-                    v-model="companySize"
-                    placeholder="Select a size"
-                    :options="[
-                      '1-5 Employees',
-                      '5-25 Employees',
-                      '25-50 Employees',
-                      '50-100 Employees',
-                      '100+ Employees',
-                    ]"
-                  />
-                </VControl>
-              </VField>
-            </div>
-            <div class="column is-6">
-              <VField>
-                <label>Business Type</label>
+                <label>Address</label>
                 <VControl>
                   <Multiselect
                     v-model="businessType"
                     placeholder="Select a type"
                     :options="[
-                      'Government',
-                      'Medical',
-                      'Finance',
-                      'Services',
-                      'Technology',
+                      'Kampala',
+                      'Nairobi',
+                      'Dar-el-Salaam',
+                      'Kinshasha',
+                      'Juba',
                     ]"
-                  />
-                </VControl>
-              </VField>
-            </div>
-            <div class="column is-12">
-              <VField>
-                <label>Company Email</label>
-                <VControl icon="feather:mail">
-                  <input
-                    type="email"
-                    class="input"
-                    placeholder=""
-                    autocomplete="email"
-                    inputmode="email"
                   />
                 </VControl>
               </VField>
@@ -178,44 +190,27 @@ const isStuck = computed(() => {
         <!--Fieldset-->
         <div class="form-fieldset">
           <div class="fieldset-heading">
-            <h4>Demonstration</h4>
-            <p>how would you like your demo?</p>
+            <h4>About / Bio</h4>
+            <p>Write a captivating bio about yourself</p>
           </div>
 
           <div class="columns is-multiline">
             <div class="column is-6">
               <VField>
-                <label>Product to demo</label>
+                <label>Gender</label>
                 <VControl>
                   <Multiselect
                     v-model="productToDemo"
-                    placeholder="Select a product"
-                    :options="['Vuero Starter', 'Vuero Pro', 'Vuero Business']"
+                    placeholder="Select your Gender"
+                    :options="['Female', 'Male', 'Prefer Not To Say', 'Other']"
                   />
                 </VControl>
               </VField>
             </div>
-            <div class="column is-6">
-              <v-date-picker v-model="date" color="green" trim-weeks>
-                <template #default="{ inputValue, inputEvents }">
-                  <VField>
-                    <label>Prefered Date</label>
-                    <VControl icon="feather:calendar">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="Select a date"
-                        :value="inputValue"
-                        v-on="inputEvents"
-                      />
-                    </VControl>
-                  </VField>
-                </template>
-              </v-date-picker>
-            </div>
+            
             <div class="column is-12">
               <VField>
-                <label>Special Instructions</label>
+                <label>Write an essay about you</label>
                 <VControl>
                   <textarea
                     class="textarea"
