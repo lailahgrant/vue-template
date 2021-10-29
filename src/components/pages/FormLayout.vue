@@ -26,7 +26,7 @@ const isStuck = computed(() => {
             <div class="buttons">
               <VButton
                 icon="lnir lnir-arrow-left rem-100"
-                :to="{ name: 'sidebar-layouts-profile-view' }"
+                :to="{ name: 'index' }"
                 light
                 dark-outlined
               >
@@ -236,6 +236,6 @@ const isStuck = computed(() => {
 </template>
 
 <style lang="scss">
-@import '../../../../scss/abstracts/_mixins.scss';
-@import '../../../../scss/pages/generic/_forms.scss';
+@import '../../scss/abstracts/_mixins.scss';
+@import '../../scss/pages/generic/_forms.scss';
 </style>

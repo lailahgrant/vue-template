@@ -105,7 +105,7 @@ watchEffect(() => {
         </div>
         <div class="navbar-item">
           <VButton
-            :to="{ name: 'auth-login', query: { redirect: '/auth/signup' } }"
+            :to="{ name: 'auth-form'}"
             color="primary"
             rounded
             raised
