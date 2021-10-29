@@ -61,9 +61,9 @@ const handleSignup = async (values: typeof schema) => {
     isLoading.value = false
 
     form.name = ''
-  form.email = ''
-  form.pass = ''
-  router.push({ name: 'auth-login' })
+    form.email = ''
+    form.pass = ''
+    router.push({ name: 'auth-login' })
 
   }
 }

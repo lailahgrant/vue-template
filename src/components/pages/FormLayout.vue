@@ -2,9 +2,14 @@
 import { useWindowScroll } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
-const companySize = ref('')
-const businessType = ref('')
-const productToDemo = ref('')
+//firebase.js
+import { createUser } from '/@src/firebase'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+// const companySize = ref('')
+// const businessType = ref('')
+// const productToDemo = ref('')
 const date = ref(new Date())
 
 const { y } = useWindowScroll()
@@ -12,10 +17,45 @@ const { y } = useWindowScroll()
 const isStuck = computed(() => {
   return y.value > 30
 })
+
+const router = useRouter()
+
+//to handle submit button
+const form = ref({
+  fname: '',
+  lname: '',
+  date: '',
+  profession: '',
+  email: '',
+  country: '',
+  address: '',
+  number: '',
+  gender: '',
+  essay: '',
+})
+
+const handleSignup = async () => {
+  // console.log(form.value)
+  await createUser({ ...form.value })
+
+  router.push({ name: 'auth-login' })
+  form.value.fname = ''
+  form.value.lname = ''
+  form.value.date = ''
+  form.value.profession = ''
+  form.value.email = ''
+  form.value.country = ''
+  form.value.address = ''
+  form.value.number = ''
+  form.value.gender = ''
+  form.value.essay = ''
+
+  return { form, handleSignup }
+}
 </script>
 
 <template>
-  <form class="form-layout" @submit.prevent>
+  <form class="form-layout" @submit.prevent="handleSignup">
     <div class="form-outer">
       <div :class="[isStuck && 'is-stuck']" class="form-header stuck-header">
         <div class="form-header-inner">
@@ -32,7 +72,9 @@ const isStuck = computed(() => {
               >
                 Cancel
               </VButton>
-              <VButton color="primary" raised> Schedule </VButton>
+              <VButton color="primary" raised @click="handleSignup">
+                Send
+              </VButton>
             </div>
           </div>
         </div>
@@ -51,10 +93,12 @@ const isStuck = computed(() => {
                 <label>First Name</label>
                 <VControl icon="feather:user">
                   <input
+                    v-model="form.fname"
                     type="text"
                     class="input"
                     placeholder=""
                     autocomplete="given-name"
+                    required
                   />
                 </VControl>
               </VField>
@@ -64,16 +108,18 @@ const isStuck = computed(() => {
                 <label>Last Name</label>
                 <VControl icon="feather:user">
                   <input
+                    v-model="form.lname"
                     type="text"
                     class="input"
                     placeholder=""
                     autocomplete="family-name"
+                    required
                   />
                 </VControl>
               </VField>
             </div>
             <div class="column is-6">
-              <v-date-picker v-model="date" color="green" trim-weeks>
+              <v-date-picker v-model="form.date" color="green" trim-weeks>
                 <template #default="{ inputValue, inputEvents }">
                   <VField>
                     <label>Date of Birth</label>
@@ -83,6 +129,7 @@ const isStuck = computed(() => {
                         type="text"
                         placeholder="Select a date"
                         :value="inputValue"
+                        required
                         v-on="inputEvents"
                       />
                     </VControl>
@@ -95,7 +142,7 @@ const isStuck = computed(() => {
                 <label>Profession</label>
                 <VControl>
                   <Multiselect
-                    v-model="companySize"
+                    v-model="form.profession"
                     placeholder="Select your profession"
                     :options="[
                       'Web Developer',
@@ -105,6 +152,7 @@ const isStuck = computed(() => {
                       'Data Scientist',
                       'Other',
                     ]"
+                    required
                   />
                 </VControl>
               </VField>
@@ -124,11 +172,13 @@ const isStuck = computed(() => {
                 <label>Email Address</label>
                 <VControl icon="feather:mail">
                   <input
+                    v-model="form.email"
                     type="email"
                     class="input"
                     placeholder=""
                     autocomplete="email"
                     inputmode="email"
+                    required
                   />
                 </VControl>
               </VField>
@@ -138,7 +188,7 @@ const isStuck = computed(() => {
                 <label>Country</label>
                 <VControl>
                   <Multiselect
-                    v-model="businessType"
+                    v-model="form.country"
                     placeholder="Select a type"
                     :options="[
                       'Uganda',
@@ -148,6 +198,7 @@ const isStuck = computed(() => {
                       'DR Congo',
                       'South Sudan',
                     ]"
+                    required
                   />
                 </VControl>
               </VField>
@@ -157,22 +208,24 @@ const isStuck = computed(() => {
                 <label>Contact / Phone Number</label>
                 <VControl icon="feather:phone">
                   <input
+                    v-model="form.number"
                     type="tel"
                     class="input"
                     placeholder=""
                     autocomplete="tel"
                     inputmode="tel"
+                    required
                   />
                 </VControl>
               </VField>
             </div>
-            
+
             <div class="column is-6">
               <VField>
                 <label>Address</label>
                 <VControl>
                   <Multiselect
-                    v-model="businessType"
+                    v-model="form.address"
                     placeholder="Select a type"
                     :options="[
                       'Kampala',
@@ -181,6 +234,7 @@ const isStuck = computed(() => {
                       'Kinshasha',
                       'Juba',
                     ]"
+                    required
                   />
                 </VControl>
               </VField>
@@ -200,25 +254,28 @@ const isStuck = computed(() => {
                 <label>Gender</label>
                 <VControl>
                   <Multiselect
-                    v-model="productToDemo"
+                    v-model="form.gender"
                     placeholder="Select your Gender"
                     :options="['Female', 'Male', 'Prefer Not To Say', 'Other']"
+                    required
                   />
                 </VControl>
               </VField>
             </div>
-            
+
             <div class="column is-12">
               <VField>
                 <label>Write an essay about you</label>
                 <VControl>
                   <textarea
+                    v-model="form.essay"
                     class="textarea"
                     rows="4"
                     placeholder="Tell us about any details you'd like us to know..."
                     autocomplete="off"
                     autocapitalize="off"
                     spellcheck="true"
+                    required
                   ></textarea>
                 </VControl>
               </VField>
