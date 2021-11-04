@@ -78,3 +78,118 @@ export const useLoadUsers = () => {
     return users
 }
 
+
+// //* AUTHENTICTION */
+
+// will be used with the route guard
+export const initialised = ref(false)
+
+export const user = ref<any>(null);
+
+const authent = getAuth();
+
+authent.onAuthStateChanged((u) => {
+    user.value = u;
+    initialised.value = true
+});
+
+//  /** logout */
+export async function logout() {
+    await authent.signOut();
+}
+
+// * Signin with Google* */
+const provider = new GoogleAuthProvider();
+export async function google() {
+    // await signInWithPopup(new GoogleAuthProvider());
+    signInWithPopup(authent, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+      console.log(user)
+      
+      const u = `<h1>${user.displayName}</h1>`;
+
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.c
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
+}
+
+///show  details
+    //  SHOW USER  DETAILS
+
+
+
+//  ///** Login**/
+export async function useLogin(){
+    const email = ref("");
+    const password = ref("");
+
+    async function login() {
+        //     const resp = await authent.signInWithEmailAndPassword(
+        //         email.value,
+        //         password.value
+        //     );
+
+        //     if(!resp.user) throw Error("User not Found !!!");
+
+        //     user.value = resp.user;
+
+        // }
+
+        signInWithEmailAndPassword(authent, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+    }
+
+    return {
+        email, 
+        password,
+        login,
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

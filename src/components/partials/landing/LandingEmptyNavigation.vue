@@ -105,7 +105,7 @@ watchEffect(() => {
         </div>
         <div class="navbar-item">
           <VButton
-            :to="{ name: 'auth-form'}"
+            :to="{ name: 'auth-signup1'}"
             color="primary"
             rounded
             raised
