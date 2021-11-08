@@ -42,7 +42,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
             <div class="profile-card-section">
               <div class="section-title">
                 <h4>About Me</h4>
-                <RouterLink :to="{ name: 'sidebar-layouts-profile-edit' }">
+                <RouterLink :to="{ name: 'auth-profile-edit' }">
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>
               </div>
@@ -571,8 +571,8 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
 </template>
 
 <style lang="scss">
-@import '../../../../scss/abstracts/_mixins.scss';
-@import '../../../../scss/pages/profile/_user-profile.scss';
+@import '../../scss/abstracts/_mixins.scss';
+@import '../../scss/pages/profile/_user-profile.scss';
 
 .is-dark {
   .icon-wrap,

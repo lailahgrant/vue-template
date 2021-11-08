@@ -101,7 +101,7 @@ onUnmounted(() => {
 
 defineComponent({
     props: {
-        loginReturnUrl : { type: String, default: "/" }
+        // loginReturnUrl : { type: String, default: "/" }
         // pic,
         // email,
         // dname
@@ -111,15 +111,15 @@ defineComponent({
             () => user.value,
             newUser => {
               console.log(user.value)
-              if(user.value != null){
+              /*if(user.value != null){
                   const userObj = {
                   name: user.value.displayName || null,
                   email: user.value.email,
               }
-              }
+              }*/
              
                 if(newUser) {
-                    router.push(props.loginReturnUrl)
+                    // router.push(props.loginReturnUrl)
                 }
                 /* props.pic = `<img src="${user.displayName}" />`
                 props.dname  = `<h1>${user.displayName}</h1>` */

@@ -102,7 +102,7 @@ useHead({
                 <div class="auth-content">
                   <h2>Welcome Back.</h2>
                   <p>Please sign in to your account</p>
-                  <RouterLink :to="{ name: 'auth-form' }">
+                  <RouterLink :to="{ name: 'auth-signup1' }">
                     I do not have an account yet
                   </RouterLink>
                 </div>
@@ -153,14 +153,25 @@ useHead({
 
                       <!-- Submit -->
                       <VControl class="login">
-                        <VButton
+                        <!-- <VButton
+                          :to="{ name: 'auth-profile-edit'}"
                           :loading="isLoading"
                           color="primary"
                           type="submit"
                           bold
                           fullwidth
                           raised
-                        >
+                        > -->
+
+                        <VButton
+                          :to="{ name: 'sidebar-layouts-profile-edit'}"
+                          :loading="isLoading"
+                          color="primary"
+                          type="submit"
+                          bold
+                          fullwidth
+                          raised
+                        >                        
                           Sign In
                         </VButton>
                       </VControl>

@@ -84,7 +84,8 @@ export const useLoadUsers = () => {
 // will be used with the route guard
 export const initialised = ref(false)
 
-export const user = ref<any>(null);
+export const user = ref(null);
+//export const user = ref<any>(null);
 
 const authent = getAuth();
 
@@ -111,8 +112,24 @@ export async function google() {
     const user = result.user;
       console.log(user)
       
-      const u = `<h1>${user.displayName}</h1>`;
+      const myUser = {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        userId: user.email,
+        login: user.uid
+      }
 
+    //   Store some infor that comes with the email in the firestore
+        const usersCollection = doc(db, `users/${user.email}`)
+
+        const getUser = async (id) => {
+        const docRef = doc(db, `/users/${id}`)
+        const user = await getDoc(docRef)
+        return user.exists ? user.data() : null
+        }
+
+        return setDoc(usersCollection, myUser)
     // ...
   }).catch((error) => {
     // Handle Errors here.c
@@ -134,38 +151,7 @@ export async function google() {
 
 //  ///** Login**/
 export async function useLogin(){
-    const email = ref("");
-    const password = ref("");
 
-    async function login() {
-        //     const resp = await authent.signInWithEmailAndPassword(
-        //         email.value,
-        //         password.value
-        //     );
-
-        //     if(!resp.user) throw Error("User not Found !!!");
-
-        //     user.value = resp.user;
-
-        // }
-
-        signInWithEmailAndPassword(authent, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-    }
-
-    return {
-        email, 
-        password,
-        login,
-    }
 
 }
 
