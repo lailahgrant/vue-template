@@ -164,7 +164,7 @@ useHead({
                         > -->
 
                         <VButton
-                          :to="{ name: 'sidebar-layouts-profile-edit'}"
+                          :to="{ name: 'app-sidebar-layouts-profile-edit'}"
                           :loading="isLoading"
                           color="primary"
                           type="submit"

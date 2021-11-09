@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 import { pageTitle } from '/@src/state/sidebarLayoutState'
+
+
+/*for   debugging purposes
 // import MyProfile from '/@src/components/pages/forms/edit-profile/MyProfile.vue';
+*/
 
 pageTitle.value = 'Profile Edit 1'
 useHead({
@@ -10,9 +14,6 @@ useHead({
 </script>
 
 <template>
-  <div>
-    <MyProfile />
-    <!-- <EditProfileGeneral /> -->
-    <!-- <EditProfileGeneral /> -->
-  </div>
+    <!-- <MyProfile /> -->
+    <EditProfileGeneral />
 </template>

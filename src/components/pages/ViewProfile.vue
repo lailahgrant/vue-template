@@ -61,7 +61,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
               <div class="section-title">
                 <h4>Experience</h4>
                 <RouterLink
-                  :to="{ name: 'sidebar-layouts-profile-edit-experience' }"
+                  :to="{ name: 'app-sidebar-layouts-profile-edit-experience' }"
                 >
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>
@@ -150,7 +150,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
               <div class="section-title">
                 <h4>Languages</h4>
                 <RouterLink
-                  :to="{ name: 'sidebar-layouts-profile-edit-skills' }"
+                  :to="{ name: 'app-sidebar-layouts-profile-edit-skills' }"
                 >
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>
@@ -245,7 +245,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
               <div class="section-title">
                 <h4>Skills</h4>
                 <RouterLink
-                  :to="{ name: 'sidebar-layouts-profile-edit-skills' }"
+                  :to="{ name: 'app-sidebar-layouts-profile-edit-skills' }"
                 >
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>
@@ -412,7 +412,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
               <div class="section-title">
                 <h4>Tools</h4>
                 <RouterLink
-                  :to="{ name: 'sidebar-layouts-profile-edit-skills' }"
+                  :to="{ name: 'app-sidebar-layouts-profile-edit-skills' }"
                 >
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>

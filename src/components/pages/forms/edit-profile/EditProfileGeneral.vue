@@ -4,10 +4,10 @@ import { computed, ref } from 'vue'
 
 import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
-// import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
+import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
 
-// import { useHead } from '@vueuse/head'
-// import { pageTitle } from '/@src/state/sidebarLayoutState'
+import { useHead } from "@vueuse/head";
+import { pageTitle } from "/@src/state/sidebarLayoutState"; 
 
 const isUploading = ref(false)
 const isLoading = ref(false)
@@ -55,7 +55,7 @@ const onSave = async () => {
 
 <template>
   <div class="account-box is-form is-footerless">
-    <!-- <div class="form-head stuck-header" :class="[isScrolling && 'is-stuck']">
+    <div class="form-head stuck-header" :class="[isScrolling && 'is-stuck']">
       <div class="form-head-inner">
         <div class="left">
           <h3>General Info</h3>
@@ -64,6 +64,7 @@ const onSave = async () => {
         <div class="right">
           <div class="buttons">
             <VButton
+              :to="{ name: 'app-sidebar-layouts-profile-view' }"
               icon="lnir lnir-arrow-left rem-100"
               light
               dark-outlined
@@ -83,7 +84,7 @@ const onSave = async () => {
       </div>
     </div>
     <div class="form-body">
-      <!--Fieldset--
+      <!--Fieldset-->
       <div class="fieldset">
         <div class="fieldset-heading">
           <h4>Profile Picture</h4>
@@ -136,7 +137,7 @@ const onSave = async () => {
         </VAvatar>
       </div>
 
-      <!--Fieldset--
+      <!--Fieldset-->
       <div class="fieldset">
         <div class="fieldset-heading">
           <h4>Personal Info</h4>
@@ -144,7 +145,7 @@ const onSave = async () => {
         </div>
 
         <div class="columns is-multiline">
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="feather:user">
@@ -157,7 +158,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="feather:user">
@@ -170,7 +171,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-12">
             <VField>
               <VControl icon="feather:briefcase">
@@ -183,7 +184,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-12">
             <VField>
               <VControl icon="feather:map-pin">
@@ -196,7 +197,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-12">
             <VField>
               <VControl>
@@ -214,14 +215,14 @@ const onSave = async () => {
         </div>
       </div>
 
-      <!--Fieldset--
+      <!--Fieldset-->
       <div class="fieldset">
         <div class="fieldset-heading">
           <h4>Professional Info</h4>
           <p>This can help you to win some opportunities</p>
         </div>
         <div class="columns is-multiline">
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl>
@@ -238,7 +239,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl>
@@ -250,7 +251,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl>
@@ -262,7 +263,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl>
@@ -274,7 +275,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-12">
             <VField>
               <VControl>
@@ -292,14 +293,14 @@ const onSave = async () => {
         </div>
       </div>
 
-      <!--Fieldset--
+      <!--Fieldset-->
       <div class="fieldset">
         <div class="fieldset-heading">
           <h4>Social Profiles</h4>
           <p>This can help others finding you on social media</p>
         </div>
         <div class="columns is-multiline">
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-facebook-f">
@@ -312,7 +313,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-twitter">
@@ -325,7 +326,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-dribbble">
@@ -338,7 +339,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-instagram">
@@ -351,7 +352,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-github">
@@ -364,7 +365,7 @@ const onSave = async () => {
               </VControl>
             </VField>
           </div>
-          <!--Field--
+          <!--Field-->
           <div class="column is-6">
             <VField>
               <VControl icon="fab fa-gitlab">
@@ -379,6 +380,6 @@ const onSave = async () => {
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>

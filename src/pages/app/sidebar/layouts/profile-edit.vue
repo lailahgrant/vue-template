@@ -18,7 +18,7 @@
 
             <div class="account-menu">
               <RouterLink
-                :to="{ name: 'sidebar-layouts-profile-edit' }"
+                :to="{ name: 'app-sidebar-layouts-profile-edit' }"
                 class="account-menu-item"
               >
                 <i aria-hidden="true" class="lnil lnil-user-alt"></i>
@@ -28,7 +28,7 @@
                 </span>
               </RouterLink>
               <RouterLink
-                :to="{ name: 'sidebar-layouts-profile-edit-experience' }"
+                :to="{ name: 'app-sidebar-layouts-profile-edit-experience' }"
                 class="account-menu-item"
               >
                 <i aria-hidden="true" class="lnil lnil-crown-alt"></i>
@@ -38,7 +38,7 @@
                 </span>
               </RouterLink>
               <RouterLink
-                :to="{ name: 'sidebar-layouts-profile-edit-skills' }"
+                :to="{ name: 'app-sidebar-layouts-profile-edit-skills' }"
                 class="account-menu-item"
               >
                 <i aria-hidden="true" class="lnil lnil-quill"></i>
@@ -48,7 +48,7 @@
                 </span>
               </RouterLink>
               <RouterLink
-                :to="{ name: 'sidebar-layouts-profile-edit-settings' }"
+                :to="{ name: 'app-sidebar-layouts-profile-edit-settings' }"
                 class="account-menu-item"
               >
                 <i aria-hidden="true" class="lnil lnil-cog"></i>
@@ -73,6 +73,6 @@
 </template>
 
 <style lang="scss">
-@import '../../../scss/abstracts/_mixins.scss';
-@import '../../../scss/pages/profile/_user-profile.scss';
+@import '../../../../scss/abstracts/_mixins.scss';
+@import '../../../../scss/pages/profile/_user-profile.scss';
 </style>
