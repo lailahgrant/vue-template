@@ -42,7 +42,7 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
             <div class="profile-card-section">
               <div class="section-title">
                 <h4>About Me</h4>
-                <RouterLink :to="{ name: 'auth-profile-edit' }">
+                <RouterLink :to="{ name: 'app-sidebar-layouts-profile-edit' }">
                   <i aria-hidden="true" class="lnil lnil-pencil"></i>
                 </RouterLink>
               </div>

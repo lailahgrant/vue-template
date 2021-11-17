@@ -119,23 +119,23 @@ export async function createApp({ enhanceApp }: VueroAppOptions) {
   router.beforeEach((to, from) => {
     const userSession = useUserSession()
 
-    if (to.meta.requiresAuth && !userSession.isLoggedIn) {
+    //if (to.meta.requiresAuth && !userSession.isLoggedIn) {
       // this route requires auth, check if logged in
       // if not, redirect to login page.
-      const notif = useNotyf()
+      /* const notif = useNotyf()
       notif.error({
         message:
           'Sorry, you should loggin to access this section (anything will work)',
         duration: 7000,
-      })
+      }) */
 
-      return {
+      //return {
         // Will follow the redirection set in /@src/pages/auth/index.vue
-        name: 'auth',
+        ///name: 'auth',
         // save the location we were at to come back later
-        query: { redirect: to.fullPath },
-      }
-    }
+        //query: { redirect: to.fullPath },
+      //}
+   // }
   })
 
   app.use(head)

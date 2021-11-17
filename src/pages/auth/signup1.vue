@@ -305,7 +305,7 @@ defineComponent({
                       >
                         Sign up with Google
                       </VButton>
-                      <VButton
+                      <!-- <VButton
                         color="primary"
                         size="big"
                         bold
@@ -314,7 +314,7 @@ defineComponent({
                         @click="step++"
                       >
                         Continue
-                      </VButton>
+                      </VButton> -->
                       <span>
                         Or
                         <RouterLink :to="{ name: 'auth-login' }">

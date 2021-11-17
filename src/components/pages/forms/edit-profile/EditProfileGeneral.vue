@@ -223,7 +223,7 @@ const onSave = async () => {
         </div>
         <div class="columns is-multiline">
           <!--Field-->
-          <div class="column is-6">
+          <!-- <div class="column is-6">
             <VField>
               <VControl>
                 <Multiselect
@@ -238,9 +238,9 @@ const onSave = async () => {
                 />
               </VControl>
             </VField>
-          </div>
+          </div> -->
           <!--Field-->
-          <div class="column is-6">
+          <!-- <div class="column is-6">
             <VField>
               <VControl>
                 <Multiselect
@@ -250,7 +250,54 @@ const onSave = async () => {
                 />
               </VControl>
             </VField>
+          </div> -->
+
+          <!-- CV Field -->
+          <div class="column is-12">
+            <p>Please Upload your CV</p>
+            <VField grouped>
+              <VControl>
+                <div class="file  is-success">
+                  <label class="file-label">
+                    <input class="file-input" type="file" name="resume" />
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                      </span>
+                      <span class="file-label"> Upload your CV… </span>
+                    </span>
+                    <span class="file-name light-text">
+                      freelancer_name.pdf
+                    </span>
+                  </label>
+                </div>
+              </VControl>
+            </VField>
           </div>
+          
+          <!-- CV Field -->
+          <div class="column is-12">
+            <p>Please Upload your Cover Letter</p>
+            <VField grouped>
+              <VControl>
+                <div class="file  is-success">
+                  <label class="file-label">
+                    <input class="file-input" type="file" name="resume" />
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                      </span>
+                      <span class="file-label"> Upload your Cover Letter… </span>
+                    </span>
+                    <span class="file-name light-text">
+                      freelancer_cover_letter.pdf
+                    </span>
+                  </label>
+                </div>
+              </VControl>
+            </VField>
+          </div>
+
           <!--Field-->
           <div class="column is-6">
             <VField>
@@ -276,7 +323,7 @@ const onSave = async () => {
             </VField>
           </div>
           <!--Field-->
-          <div class="column is-12">
+          <!-- <div class="column is-12">
             <VField>
               <VControl>
                 <Multiselect
@@ -289,9 +336,254 @@ const onSave = async () => {
                 />
               </VControl>
             </VField>
-          </div>
+          </div> -->
         </div>
       </div>
+
+
+
+      <!--Fieldset-->
+      <div class="fieldset">
+        <div class="fieldset-heading">
+          <h4>Education Info</h4>
+          <p>Others deserve to know you more</p>
+        </div>
+
+        <div class="columns is-multiline">
+          <!--Field-->
+          <div class="column is-6">
+            <p>School *</p>
+            <VField>
+              <VControl icon="feather:layers">
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="Makerere University"
+                  autocomplete="given-name"
+                />
+              </VControl>
+            </VField>
+          </div>
+          <!--Field-->
+          <div class="column is-6">
+            <p>Degree *</p>
+            <VField>
+              <VControl icon="feather:award">
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="Bachelor"
+                  autocomplete="family-name"
+                />
+              </VControl>
+            </VField>
+          </div>
+          <!--Field-->
+          <div class="column is-12">
+            <p>Field of Study</p>
+            <VField>
+              <VControl icon="feather:briefcase">
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="Computer Science"
+                  autocomplete="organization-title"
+                />
+              </VControl>
+            </VField>
+          </div>
+
+
+          <!--Study Duration Field-->
+          <div class="column is-6">
+            <p>Start Date</p>
+            <VField>
+              <VControl>
+                <Multiselect
+                  v-model="experience"
+                  placeholder="month"
+                  :options="[
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'Novermber',
+                    'December',
+                  ]"
+                />
+              </VControl>
+            </VField>
+          </div>
+          
+          <!--Field-->
+          <div class="column is-6">
+            <p>Year</p>
+            <VField>
+              <VControl>
+                <Multiselect
+                  v-model="firstJob"
+                  placeholder="year"
+                  :options="[
+                    '2021',
+                    '2020',
+                    '2019',
+                    '2018',
+                    '2017',
+                    '2016',
+                    '2015',
+                    '2014',
+                    '2013',
+                    '2012',
+                    '2011',
+                    '2010',
+                    '2009',
+                    '2008',
+                    '2007',
+                    '2006',
+                    '2005',
+                    '2004',
+                    '2003',
+                    '2002',
+                    '2001',
+                    '2000',
+                    '1999',
+                    '1998',
+                  ]"
+                />
+              </VControl>
+            </VField>
+          </div>
+
+          <div class="column is-6">
+            <p>End Date</p>
+            <VField>
+              <VControl>
+                <Multiselect
+                  v-model="experience"
+                  placeholder="month"
+                  :options="[
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'Novermber',
+                    'December',
+                  ]"
+                />
+              </VControl>
+            </VField>
+          </div>
+
+          <!--Field-->
+          <div class="column is-6">
+            <p>End date (or expected)</p>
+            <VField>
+              <VControl>
+                <Multiselect
+                  v-model="firstJob"
+                  placeholder="year"
+                  :options="[
+                    '2021',
+                    '2020',
+                    '2019',
+                    '2018',
+                    '2017',
+                    '2016',
+                    '2015',
+                    '2014',
+                    '2013',
+                    '2012',
+                    '2011',
+                    '2010',
+                    '2009',
+                    '2008',
+                    '2007',
+                    '2006',
+                    '2005',
+                    '2004',
+                    '2003',
+                    '2002',
+                    '2001',
+                    '2000',
+                    '1999',
+                    '1998',
+                  ]"
+                />
+              </VControl>
+            </VField>
+          </div>
+
+
+          <!--Field-->
+          <div class="column is-12">
+            <p>Grade</p>
+            <VField>
+              <VControl icon="feather:book">
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="Grade"
+                  autocomplete="country-name"
+                />
+              </VControl>
+            </VField>
+          </div>
+          <!--Field-->
+          <div class="column is-12">
+            <p>Activities and Societies</p>
+            <VField>
+              <VControl>
+                <textarea
+                  class="textarea"
+                  rows="2"
+                  placeholder="GDG Lead at University, Football player"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="true"
+                ></textarea>
+              </VControl>
+            </VField>
+          </div>
+
+          <!-- CV Field -->
+          <div class="column is-12">
+            <p>Please Upload your Certificate</p>
+            <VField grouped>
+              <VControl>
+                <div class="file  is-success">
+                  <label class="file-label">
+                    <input class="file-input" type="file" name="resume" />
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                      </span>
+                      <span class="file-label"> Upload your Certificate...</span>
+                    </span>
+                    <span class="file-name light-text">
+                      freelancer_certificate.pdf
+                    </span>
+                  </label>
+                </div>
+              </VControl>
+            </VField>
+          </div>
+
+        </div>
+      </div>
+
+
 
       <!--Fieldset-->
       <div class="fieldset">

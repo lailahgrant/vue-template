@@ -57,6 +57,7 @@ const themeClasses = computed(() => {
       <!-- User account -->
       <ul class="bottom-menu">
         <slot name="bottom-links"></slot>
+      
       </ul>
     </div>
   </div>
