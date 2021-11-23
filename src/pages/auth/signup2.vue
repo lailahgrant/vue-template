@@ -8,13 +8,10 @@ import { useHead } from '@vueuse/head'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
-
 import sleep from '/@src/utils/sleep'
 import useNotyf from '/@src/composable/useNotyf'
-
-import { watch, defineComponent } from 'vue'
-import { user, google, useLogin } from '../../firebase'
-
+import { watch, defineComponent } from "vue"
+import {  user, google, useLogin} from "../../firebase" 
 let slider: TinySliderInstance
 const sliderElement = ref<HTMLElement>()
 const router = useRouter()
@@ -38,38 +35,31 @@ const avatars = [
   '/images/avatars/svg/vuero-11.svg',
   '/images/avatars/svg/vuero-12.svg',
 ]
-
 const handleSignup = async () => {
   if (!isLoading.value) {
     step.value++
     isLoading.value = true
     sleep(2000)
-
     notif.dismissAll()
     notif.success('Welcome, Erik Kovalsky')
     router.push({ name: 'sidebar-dashboards' })
     isLoading.value = false
   }
 }
-
 const onAvatarChanged = (info: any) => {
   // direct access to info object
   const indexPrev = info.indexCached
   const indexCurrent = info.index
-
   // update style based on index
   info.slideItems[indexPrev].classList.remove('active')
   info.slideItems[indexCurrent].classList.add('active')
-
   if (info.displayIndex) {
     selectedAvatar.value = info.displayIndex - 1
   }
 }
-
 useHead({
   title: 'Auth Signup 1 - Vuero',
 })
-
 onMounted(() => {
   if (sliderElement.value) {
     slider = tns({
@@ -90,268 +80,206 @@ onMounted(() => {
     onAvatarChanged(slider.getInfo())
   }
 })
-
 onUnmounted(() => {
   if (slider) {
     slider.events.off('indexChanged', onAvatarChanged)
     slider.destroy()
   }
 })
-
 defineComponent({
-  props: {
-    // loginReturnUrl : { type: String, default: "/" }
-    // pic,
-    // email,
-    // dname
-  },
-  setup(props) {
-    watch(
-      () => user.value,
-      (newUser) => {
-        console.log(user.value)
-        /*if(user.value != null){
+    props: {
+        // loginReturnUrl : { type: String, default: "/" }
+        // pic,
+        // email,
+        // dname
+    },
+    setup(props){
+        watch(
+            () => user.value,
+            newUser => {
+              console.log(user.value)
+              /*if(user.value != null){
                   const userObj = {
                   name: user.value.displayName || null,
                   email: user.value.email,
               }
               }*/
-
-        if (newUser) {
-          // router.push(props.loginReturnUrl)
-        }
-        /* props.pic = `<img src="${user.displayName}" />`
+             
+                if(newUser) {
+                    // router.push(props.loginReturnUrl)
+                }
+                /* props.pic = `<img src="${user.displayName}" />`
                 props.dname  = `<h1>${user.displayName}</h1>` */
-      }
-    )
-    return {
-      ...useLogin(),
-      google,
-    }
-  },
-})
+            }
+        );
+        return {
+            ...useLogin(),
+            google,
+        };
+    },
+    
+});
 </script>
 
 <template>
   <div>
-    <LandingLayout theme="light">
-      <div class="landing-page-wrapper">
-        <div class="is-fullheight hero">
-          <!-- Navbar partial -->
-          <LandingEmptyNavigation />
+    <div class="signup-nav">
+      <div class="signup-nav-inner">
+        <RouterLink :to="{ name: 'index' }" class="logo">
+          <AnimatedLogo width="36px" height="36px" />
+        </RouterLink>
+      </div>
+    </div>
 
-          <div class="signup-nav">
-          <div class="signup-nav-inner">
-            <RouterLink :to="{ name: 'index' }" class="logo">
-              <AnimatedLogo width="36px" height="36px" />
-            </RouterLink>
-          </div>
-        </div>
-
-        <div id="vuero-signup" class="signup-wrapper">
-          <div class="signup-steps" :class="[step === 0 && 'is-hidden']">
-            <div class="steps-container">
-              <div
-                class="step-icon is-active"
-                :class="[step >= 1 && 'is-active', step < 1 && 'is-inactive']"
-              >
-                <div class="inner">
-                  <i
-                    aria-hidden="true"
-                    class="iconify"
-                    data-icon="feather:user"
-                  ></i>
-                </div>
-                <span class="step-label">Profile Pic</span>
-              </div>
-              <div
-                class="step-icon"
-                :class="[step >= 2 && 'is-active', step < 2 && 'is-inactive']"
-              >
-                <div class="inner">
-                  <i
-                    aria-hidden="true"
-                    class="iconify"
-                    data-icon="feather:shield"
-                  ></i>
-                </div>
-                <span class="step-label">Account</span>
-              </div>
-              <div
-                class="step-icon"
-                :class="[step >= 3 && 'is-active', step < 3 && 'is-inactive']"
-              >
-                <div class="inner">
-                  <i
-                    aria-hidden="true"
-                    class="iconify"
-                    data-icon="feather:check"
-                  ></i>
-                </div>
-                <span class="step-label">Done</span>
-              </div>
-              <progress class="progress" :value="step - 1" :max="2">
-                25%
-              </progress>
+    <div id="vuero-signup" class="signup-wrapper">
+      <div class="signup-steps" :class="[step === 0 && 'is-hidden']">
+        <div class="steps-container">
+          <div
+            class="step-icon is-active"
+            :class="[step >= 1 && 'is-active', step < 1 && 'is-inactive']"
+          >
+            <div class="inner">
+              <i
+                aria-hidden="true"
+                class="iconify"
+                data-icon="feather:user"
+              ></i>
             </div>
+            <span class="step-label">Profile Pic</span>
           </div>
+          <div
+            class="step-icon"
+            :class="[step >= 2 && 'is-active', step < 2 && 'is-inactive']"
+          >
+            <div class="inner">
+              <i
+                aria-hidden="true"
+                class="iconify"
+                data-icon="feather:shield"
+              ></i>
+            </div>
+            <span class="step-label">Account</span>
+          </div>
+          <div
+            class="step-icon"
+            :class="[step >= 3 && 'is-active', step < 3 && 'is-inactive']"
+          >
+            <div class="inner">
+              <i
+                aria-hidden="true"
+                class="iconify"
+                data-icon="feather:check"
+              ></i>
+            </div>
+            <span class="step-label">Done</span>
+          </div>
+          <progress class="progress" :value="step - 1" :max="2">25%</progress>
+        </div>
+      </div>
 
-          <img
-            :class="[step > 0 && 'is-hidden']"
-            class="card-bg"
-            style="opacity: 0.25"
-            src="/@src/assets/backgrounds/signup/vuero-signup.png?format=webp"
-            alt=""
-          />
+      <img
+        :class="[step > 0 && 'is-hidden']"
+        class="card-bg"
+        src="/@src/assets/backgrounds/signup/vuero-signup.png?format=webp"
+        alt=""
+      />
 
-          <div class="hero is-fullheight">
-            <div class="hero-body">
-              <div class="container">
-                <!-- Step 1 -->
-                <div
-                  class="columns signup-columns"
-                  :class="[step !== 0 && 'is-hidden']"
-                >
-                  <div class="column is-8 is-offset-1">
-                    <!--<div class="column is-4 is-offset-1">-->
-                    <h1 id="main-signup-title" class="title is-3 signup-title">
-                      Become a Vuero
-                    </h1>
-                    <h2
-                      id="main-signup-subtitle"
-                      class="subtitle signup-subtitle"
-                    >
-                      And simply join an unmatched design experience.
-                    </h2>
-                    <div class="signup-card">
-                      <form
-                        class="signup-form is-mobile-spaced"
-                        @submit.prevent
-                      >
-                        <div class="columns is-multiline">
-                          <!-- <div class="column is-6">
-                            <VField>
-                              <VControl>
-                                <input
-                                  type="text"
-                                  class="input"
-                                  autocomplete="given-name"
-                                />
-                                <div class="auth-label">First Name</div>
-                              </VControl>
-                            </VField>
-                          </div> -->
-                          <!-- <div class="column is-6">
-                            <VField>
-                              <VControl>
-                                <input
-                                  type="text"
-                                  class="input"
-                                  autocomplete="family-name"
-                                />
-                                <div class="auth-label">Last Name</div>
-                              </VControl>
-                            </VField>
+      <div class="hero is-fullheight">
+        <div class="hero-body">
+          <div class="container">
+            <!-- Step 1 -->
+            <div
+              class="columns signup-columns"
+              :class="[step !== 0 && 'is-hidden']"
+            >
+              <div class="column is-8 is-offset-1">  <!--<div class="column is-4 is-offset-1">-->
+                <h1 id="main-signup-title" class="title is-3 signup-title">
+                  Become a Vuero
+                </h1>
+                <h2 id="main-signup-subtitle" class="subtitle signup-subtitle">
+                  And simply join an unmatched design experience.
+                </h2>
+                <div class="signup-card">
+                  <form class="signup-form is-mobile-spaced" @submit.prevent>
+                    <div class="columns is-multiline">
+                      <div class="column is-6">
+                        <VField>
+                          <VControl>
+                            <input
+                              type="text"
+                              class="input"
+                              autocomplete="given-name"
+                            />
+                            <div class="auth-label">First Name</div>
+                          </VControl>
+                        </VField>
+                      </div>
+                      <div class="column is-6">
+                        <VField>
+                          <VControl>
+                            <input
+                              type="text"
+                              class="input"
+                              autocomplete="family-name"
+                            />
+                            <div class="auth-label">Last Name</div>
+                          </VControl>
+                        </VField>
+                      </div>
+                      <div class="column is-12">
+                        <VField>
+                          <VControl>
+                            <input
+                              type="text"
+                              class="input"
+                              autocomplete="email"
+                            />
+                            <div class="auth-label">Email Address</div>
+                          </VControl>
+                        </VField>
+                      </div>
+                      <!-- <div class="column is-12">
+                        <div class="signup-type">
+                          <div class="box-wrap" >
+                            <input type="radio" name="signup_type" checked />
+                            <div class="signup-box">
+                              <i
+                                aria-hidden="true"
+                                class="lnil lnil-coffee-cup"
+                              ></i>
+                              <div class="meta">
+                                <span>Developer</span>
+                                <span>Sign up with Google to get started</span>
+                              </div>
+                            </div>
                           </div>
-                          <div class="column is-12">
-                            <VField>
-                              <VControl>
-                                <input
-                                  type="text"
-                                  class="input"
-                                  autocomplete="email"
-                                />
-                                <div class="auth-label">Email Address</div>
-                              </VControl>
-                            </VField>
-                          </div> -->
-                          <div class="column is-12">
-                            <div class="signup-type">
-                            <div class="box-wrap">
-                              <div class="signup-box">
-                            <VButton icon="lnil lnil-coffee-cup" color="white" :to="{ name: 'auth-signup2' }"> 
-                                  <div class="meta">
-                                    <span>Developer</span><br>
-                                    <span>Sign up with Google to get started</span
-                                    >
-                                  </div>
-                              </VButton>
+                          <div class="box-wrap">
+                            <input type="radio" name="signup_type" />
+                            <div class="signup-box">
+                              <i
+                                aria-hidden="true"
+                                class="lnil lnil-crown-alt-1"
+                              ></i>
+                              <div class="meta">
+                                <span>Hire Company</span>
+                                <span>Sign up  with Google to get started</span>
                               </div>
-                              </div>
-
-                              <div class="box-wrap">
-                              <div class="signup-box">
-                            <VButton icon="lnil lnil-crown-alt-1" color="white" :to="{ name: 'auth-signup2' }"> 
-                                  <div class="meta">
-                                    <span>Hire Company</span> <br>
-                                    <span
-                                      >Sign up with Google to get started</span
-                                    >
-                                  </div>
-                              </VButton>
-                              </div>
-                              </div>
-
-                              </div>
-                            <!-- <div class="signup-type">
-                              <div class="box-wrap">
-                                <input
-                                  type="button"
-                                  name="signup_type"
-                                  checked
-                                />
-                                <div class="signup-box">
-                                  <i
-                                    aria-hidden="true"
-                                    class="lnil lnil-coffee-cup"
-                                  ></i>
-                                  <div class="meta">
-                                    <span>Developer</span>
-                                    <span
-                                      >Sign up with Google to get started</span
-                                    >
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="box-wrap">
-                                <input type="radio" name="signup_type" />
-                                <div class="signup-box">
-                                  <i
-                                    aria-hidden="true"
-                                    class="lnil lnil-crown-alt-1"
-                                  ></i>
-                                  <div class="meta">
-                                    <span>Hire Company</span>
-                                    <span
-                                      >Sign up with Google to get started</span
-                                    >
-                                  </div>
-                                </div>
-                              </div>
-                            </div>-->
-                          </div> 
+                            </div>
+                          </div>
                         </div>
+                      </div>
+                    </div> -->
 
-                        <!-- <div class="control is-agree">
-                          <span>
-                            By continuing you agree to our
-                            <a href="#">Terms</a> and
-                            <a href="#">Privacy</a>
-                          </span>
-                        </div> -->
-<!-- 
-                        <div class="button-wrap has-help">
-                          <VButton
-                            color="primary"
-                            size="big"
-                            bold
-                            fullwidth
-                            rounded
-                            @click="google"
-                          >
-                            Sign up with Google
-                          </VButton> -->
-                          <!-- <VButton
+                    <div class="control is-agree">
+                      <span>
+                        By continuing you agree to our <a href="#">Terms</a> and
+                        <a href="#">Privacy</a>
+                      </span>
+                    </div>
+
+                    <div class="button-wrap has-help">
+
+                      <!-- <VButton
                         color="primary"
                         size="big"
                         bold
@@ -359,269 +287,273 @@ defineComponent({
                         rounded
                         @click="step++"
                       >
-                        Continue
+                        Sign Up
                       </VButton> -->
-                          <!-- <span>
-                            Or
-                            <RouterLink :to="{ name: 'auth-login' }">
-                              Sign In
-                            </RouterLink>
-                            to your account.
-                          </span> -->
-                        <!-- </div> -->
-                      </form>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- Step 2 -->
-                <!-- a)  changed  this below - commented initial design -->
-                <div
-                  class="columns signup-columns"
-                  :class="[step !== 1 && 'is-hidden']"
-                >
-                  <!-- <div
-              class="columns signup-columns"
-              :class="[step == 1 && !'is-hidden']"
-            > -->
-                  <form class="column is-8" @submit.prevent>
-                    <div class="signup-profile-wrapper">
-                      <h1 class="title is-5 signup-title has-text-centered">
-                        Add a profile picture
-                      </h1>
-                      <h2 class="subtitle signup-subtitle has-text-centered">
-                        This is your visual identity.
-                      </h2>
-                      <div class="picture-selector">
-                        <div class="image-container">
-                          <img :src="avatars[selectedAvatar]" alt="" />
-                          <div
-                            class="upload-button"
-                            role="button"
-                            tabindex="0"
-                            @click="uploadModalOpen = true"
-                          >
-                            <i
-                              aria-hidden="true"
-                              class="iconify"
-                              data-icon="feather:plus"
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="divider-container">
-                      <div class="divider">
-                        <span>Or select an avatar</span>
-                      </div>
-                    </div>
-
-                    <div
-                      ref="sliderElement"
-                      class="avatar-carousel resized-mobile"
-                    >
-                      <div
-                        v-for="(avatar, key) in avatars"
-                        :key="key"
-                        class="carousel-item"
-                      >
-                        <div class="image-wrapper">
-                          <img
-                            :src="avatar"
-                            alt=""
-                            @error.once="
-                              (event) =>
-                                useViaPlaceholderError(event, '150x150')
-                            "
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="button-wrap is-centered has-text-centered">
                       <VButton
                         color="primary"
                         size="big"
+                        bold
+                        fullwidth
                         rounded
-                        lower
-                        @click="step++"
+                        :to="{ name: 'auth-login' }"
                       >
-                        Continue
+                        Sign Up
                       </VButton>
+
+                      <VButton
+                        color="primary"
+                        size="big"
+                        bold
+                        fullwidth
+                        rounded
+                        @click="google"
+                      >
+                        Sign up with Google
+                      </VButton>
+                      
+                      <span>
+                        Or
+                        <RouterLink :to="{ name: 'auth-login' }">
+                          Sign In
+                        </RouterLink>
+                        to your account.
+                      </span>
+                    </div>
                     </div>
                   </form>
+              </div>
+            </div>
+            </div>
+
+            <!-- Step 2 -->
+            <!-- a)  changed  this below - commented initial design-->
+              <div
+              class="columns signup-columns"
+              :class="[step !== 1 && 'is-hidden']"
+            > 
+            <!-- <div
+              class="columns signup-columns"
+              :class="[step == 1 && !'is-hidden']"
+            > -->
+              <form class="column is-8" @submit.prevent>
+                <div class="signup-profile-wrapper">
+                  <h1 class="title is-5 signup-title has-text-centered">
+                    Add a profile picture
+                  </h1>
+                  <h2 class="subtitle signup-subtitle has-text-centered">
+                    This is your visual identity.
+                  </h2>
+                  <div class="picture-selector">
+                    <div class="image-container">
+                      <img :src="avatars[selectedAvatar]" alt="" />
+                      <div
+                        class="upload-button"
+                        role="button"
+                        tabindex="0"
+                        @click="uploadModalOpen = true"
+                      >
+                        <i
+                          aria-hidden="true"
+                          class="iconify"
+                          data-icon="feather:plus"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Step 3 -->
-                <!-- b) commentted initial to edit the copy -->
-                <div
-                  class="columns signup-columns"
-                  :class="[step !== 2 && 'is-hidden']"
-                >
-                  <!-- <div
+                <div class="divider-container">
+                  <div class="divider">
+                    <span>Or select an avatar</span>
+                  </div>
+                </div>
+
+                <div ref="sliderElement" class="avatar-carousel resized-mobile">
+                  <div
+                    v-for="(avatar, key) in avatars"
+                    :key="key"
+                    class="carousel-item"
+                  >
+                    <div class="image-wrapper">
+                      <img
+                        :src="avatar"
+                        alt=""
+                        @error.once="
+                          (event) => useViaPlaceholderError(event, '150x150')
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="button-wrap is-centered has-text-centered">
+                  <VButton
+                    color="primary"
+                    size="big"
+                    rounded
+                    lower
+                    @click="step++" 
+                  >
+                    Continue
+                  </VButton>
+                </div>
+              </form>
+            </div>
+
+            <!-- Step 3 -->
+            <!-- b) commentted initial to edit the copy-->
+              <div
+              class="columns signup-columns"
+              :class="[step !== 2 && 'is-hidden']"
+            >
+            <!-- <div
               class="columns signup-columns"
               :class="[step == 2 && 'is-hidden']"
             > -->
-                  <div class="column is-4 is-offset-4 username-form">
-                    <h1 class="title is-5 signup-title has-text-centered">
-                      Pick a username
-                    </h1>
-                    <h2 class="subtitle signup-subtitle has-text-centered">
-                      Your username is how others will find you on Vuero so pick
-                      a good one. You can change it later.
-                    </h2>
-                    <form class="signup-form" @submit.prevent="handleSignup">
-                      <div class="columns is-multiline">
-                        <div class="column is-12">
-                          <VField>
-                            <VControl>
-                              <input
-                                type="text"
-                                class="input"
-                                autocomplete="username"
-                              />
-                              <div class="auth-label">Username</div>
-                            </VControl>
-                          </VField>
-                        </div>
-                        <div class="column is-12">
-                          <VField>
-                            <VControl>
-                              <input
-                                type="password"
-                                class="input"
-                                autocomplete="new-password"
-                              />
-                              <div class="auth-label">Password</div>
-                            </VControl>
-                          </VField>
-                        </div>
-                        <div class="column is-12">
-                          <VField>
-                            <VControl>
-                              <input
-                                type="password"
-                                class="input"
-                                autocomplete="new-password"
-                              />
-                              <div class="auth-label">Confirm Password</div>
-                            </VControl>
-                          </VField>
-                        </div>
-                        <div class="column is-12">
-                          <VField>
-                            <VControl class="has-switch">
-                              <label for="send-marketing">
-                                <span>
-                                  Send me marketing and transaction emails
-                                </span>
-                              </label>
-                              <label
-                                for="send-marketing"
-                                class="form-switch ml-auto"
-                              >
-                                <input
-                                  id="send-marketing"
-                                  type="checkbox"
-                                  class="is-switch"
-                                />
-                                <i aria-hidden="true"></i>
-                              </label>
-                            </VControl>
-                          </VField>
-                        </div>
-                      </div>
-
-                      <div class="button-wrap is-centered has-text-centered">
-                        <VButton
-                          size="big"
-                          color="primary"
-                          rounded
-                          primary
-                          lower
-                          :loading="isLoading"
-                        >
-                          Done
-                        </VButton>
-                      </div>
-                    </form>
+              <div class="column is-4 is-offset-4 username-form">
+                <h1 class="title is-5 signup-title has-text-centered">
+                  Pick a username
+                </h1>
+                <h2 class="subtitle signup-subtitle has-text-centered">
+                  Your username is how others will find you on Vuero so pick a
+                  good one. You can change it later.
+                </h2>
+                <form class="signup-form" @submit.prevent="handleSignup">
+                  <div class="columns is-multiline">
+                    <div class="column is-12">
+                      <VField>
+                        <VControl>
+                          <input
+                            type="text"
+                            class="input"
+                            autocomplete="username"
+                          />
+                          <div class="auth-label">Username</div>
+                        </VControl>
+                      </VField>
+                    </div>
+                    <div class="column is-12">
+                      <VField>
+                        <VControl>
+                          <input
+                            type="password"
+                            class="input"
+                            autocomplete="new-password"
+                          />
+                          <div class="auth-label">Password</div>
+                        </VControl>
+                      </VField>
+                    </div>
+                    <div class="column is-12">
+                      <VField>
+                        <VControl>
+                          <input
+                            type="password"
+                            class="input"
+                            autocomplete="new-password"
+                          />
+                          <div class="auth-label">Confirm Password</div>
+                        </VControl>
+                      </VField>
+                    </div>
+                    <div class="column is-12">
+                      <VField>
+                        <VControl class="has-switch">
+                          <label for="send-marketing">
+                            <span>
+                              Send me marketing and transaction emails
+                            </span>
+                          </label>
+                          <label
+                            for="send-marketing"
+                            class="form-switch ml-auto"
+                          >
+                            <input
+                              id="send-marketing"
+                              type="checkbox"
+                              class="is-switch"
+                            />
+                            <i aria-hidden="true"></i>
+                          </label>
+                        </VControl>
+                      </VField>
+                    </div>
                   </div>
-                </div>
+
+                  <div class="button-wrap is-centered has-text-centered">
+                    <VButton
+                      size="big"
+                      color="primary"
+                      rounded
+                      primary
+                      lower
+                      :loading="isLoading"
+                    >
+                      Done
+                    </VButton>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- upload modal -->
-        <VModal
-          :open="uploadModalOpen"
-          title="Upload and crop your picture"
-          actions="center"
-          size="small"
-          @close="uploadModalOpen = false"
-        >
-          <template #content>
-            <div class="has-text-centered">
-              <div class="upload-demo-wrap"><VAvatar size="big" /></div>
+    <!-- upload modal -->
+    <VModal
+      :open="uploadModalOpen"
+      title="Upload and crop your picture"
+      actions="center"
+      size="small"
+      @close="uploadModalOpen = false"
+    >
+      <template #content>
+        <div class="has-text-centered">
+          <div class="upload-demo-wrap"><VAvatar size="big" /></div>
 
-              <small class="help-text"
-                >Use the slider to resize the image</small
-              >
+          <small class="help-text">Use the slider to resize the image</small>
 
-              <VField class="resize-handler">
-                <VControl>
-                  <Slider v-model="resizeValue" :tooltips="false" />
-                </VControl>
-              </VField>
+          <VField class="resize-handler">
+            <VControl>
+              <Slider v-model="resizeValue" :tooltips="false" />
+            </VControl>
+          </VField>
+        </div>
+      </template>
+      <template #cancel><wbr /></template>
+      <template #action>
+        <VField grouped>
+          <VControl>
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume" />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i aria-hidden="true" class="fas fa-cloud-upload-alt"></i>
+                  </span>
+                  <span class="file-label"> Choose a file… </span>
+                </span>
+              </label>
             </div>
-          </template>
-          <template #cancel><wbr /></template>
-          <template #action>
-            <VField grouped>
-              <VControl>
-                <div class="file">
-                  <label class="file-label">
-                    <input class="file-input" type="file" name="resume" />
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i
-                          aria-hidden="true"
-                          class="fas fa-cloud-upload-alt"
-                        ></i>
-                      </span>
-                      <span class="file-label"> Choose a file… </span>
-                    </span>
-                  </label>
-                </div>
-              </VControl>
-              <VControl>
-                <VButton class="upload-result" size="big" outlined disabled>
-                  Confirm
-                </VButton>
-              </VControl>
-            </VField>
-          </template>
-        </VModal>
-
-        <!-- Footer -->
-        <LandingFooter />
-
-        </div>
-        </div>
-      </LandingLayout> 
-      
+          </VControl>
+          <VControl>
+            <VButton class="upload-result" size="big" outlined disabled>
+              Confirm
+            </VButton>
+          </VControl>
+        </VField>
+      </template>
+    </VModal>
   </div>
 </template>
 
 <style lang="scss">
 @import '../../scss/abstracts/_mixins.scss';
 @import '../../scss/pages/profile/_user-profile.scss';
-@import '../../scss/pages/demo/_landing.scss';
-/* @import '../scss/pages/generic/_marketing.scss'; */
 /* ==========================================================================
 4. Sign up
 ========================================================================== */
-
 .signup-nav {
   position: fixed;
   top: 0;
@@ -629,7 +561,6 @@ defineComponent({
   width: 100%;
   height: 65px;
   z-index: 99;
-
   .signup-nav-inner {
     position: relative;
     width: 100%;
@@ -637,7 +568,6 @@ defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-
     .logo {
       img {
         display: block;
@@ -647,7 +577,6 @@ defineComponent({
     }
   }
 }
-
 .signup-steps {
   position: absolute;
   top: 80px;
@@ -655,14 +584,12 @@ defineComponent({
   right: 0;
   margin: 0 auto;
   max-width: 380px;
-
   .steps-container {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     .progress {
       position: absolute;
       top: 50%;
@@ -674,23 +601,19 @@ defineComponent({
       height: 0.35rem !important;
       background-color: var(--white);
       z-index: 0;
-
       &::-webkit-progress-value {
         background-color: var(--primary);
         transition: width 0.5s ease;
       }
-
       &::-moz-progress-bar {
         background-color: var(--primary);
         transition: width 0.5s ease;
       }
-
       &::-ms-fill {
         background-color: var(--primary);
         transition: width 0.5s ease;
       }
     }
-
     .step-icon {
       position: relative;
       display: flex;
@@ -702,33 +625,27 @@ defineComponent({
       background: var(--fade-grey);
       cursor: pointer;
       z-index: 1;
-
       &.is-active {
         .inner {
           background: var(--white);
           border-color: var(--primary);
-
           svg {
             color: var(--primary);
           }
         }
       }
-
       &.is-done {
         .inner {
           background: var(--primary);
           border-color: var(--primary);
-
           svg {
             color: var(--smoke-white);
           }
         }
       }
-
       &.is-inactive {
         pointer-events: none;
       }
-
       .inner {
         position: relative;
         display: flex;
@@ -740,7 +657,6 @@ defineComponent({
         border: 2px solid var(--primary-grey);
         background: var(--primary-grey);
       }
-
       .step-label {
         position: absolute;
         top: 45px;
@@ -754,7 +670,6 @@ defineComponent({
         font-weight: 500;
         color: var(--dark-text);
       }
-
       svg {
         height: 16px;
         width: 16px;
@@ -763,20 +678,16 @@ defineComponent({
     }
   }
 }
-
 .signup-columns {
   animation: fadeInLeft 0.5s;
-
   .column.is-8 {
     margin: 0 auto;
   }
 }
-
 .signup-wrapper {
   position: relative;
   min-height: 100vh;
   background: var(--fade-grey);
-
   .card-bg {
     position: absolute;
     right: 0;
@@ -784,80 +695,66 @@ defineComponent({
     display: block;
     width: 90%;
     transition: all 0.3s;
-
     &.faded {
       opacity: 0;
     }
   }
-
   .signup-title {
     font-family: var(--font-alt);
     color: var(--dark-text);
   }
-
   .signup-subtitle {
     font-family: var(--font);
     color: var(--muted-grey);
     font-size: 1rem;
   }
-
   .hero {
     .signup-form {
       .control {
         position: relative;
         width: 100%;
-
         &.has-switch {
           display: flex;
           align-items: center;
-
           span {
             display: block;
             color: var(--muted-grey);
           }
         }
-
         &.is-agree {
           span {
             color: var(--placeholder-dark-8);
-
             a {
               color: var(--muted-grey);
               font-weight: 500;
               transition: color 0.3s;
-
               &:hover {
                 color: var(--primary);
               }
             }
           }
         }
-
         .input {
           padding-top: 10px;
           height: 60px;
           padding-left: 10px;
           border-radius: 8px;
           transition: all 0.3s;
-
           &:focus {
             background: var(--fade-grey-light-6);
             border-color: var(--placeholder);
-
             ~ .auth-label,
             ~ .autv-icon i {
               color: var(--muted-grey);
             }
           }
         }
-
         .error-text {
           color: var(--danger);
           font-size: 0.8rem;
           display: none;
           padding: 2px 6px;
         }
-
         .auth-label {
           position: absolute;
           top: 6px;
@@ -868,7 +765,6 @@ defineComponent({
           z-index: 2;
           transition: all 0.3s;
         }
-
         .autv-icon {
           position: absolute;
           top: 0;
@@ -878,14 +774,12 @@ defineComponent({
           display: flex;
           justify-content: center;
           align-items: center;
-
           i {
             font-size: 24px;
             color: var(--placeholder);
             transition: all 0.3s;
           }
         }
-
         &.has-validation {
           .validation-icon {
             position: absolute;
@@ -896,7 +790,6 @@ defineComponent({
             display: none;
             justify-content: center;
             align-items: center;
-
             .icon-wrapper {
               height: 20px;
               width: 20px;
@@ -904,7 +797,6 @@ defineComponent({
               justify-content: center;
               align-items: center;
               border-radius: var(--radius-rounded);
-
               svg {
                 height: 10px;
                 width: 10px;
@@ -912,57 +804,47 @@ defineComponent({
                 color: var(--white) !important;
               }
             }
-
             &.is-success {
               .icon-wrapper {
                 background: var(--success);
               }
             }
-
             &.is-error {
               .icon-wrapper {
                 background: var(--danger);
               }
             }
           }
-
           &.has-success {
             .validation-icon {
               &.is-success {
                 display: flex;
               }
-
               &.is-error {
                 display: none;
               }
             }
           }
-
           &.has-error {
             .input {
               border-color: var(--danger);
             }
-
             .error-text {
               display: block;
             }
-
             .validation-icon {
               &.is-error {
                 display: flex;
               }
-
               &.is-success {
                 display: none;
               }
             }
           }
         }
-
         &.is-flex {
           display: flex;
           align-items: center;
-
           a {
             display: block;
             margin-left: auto;
@@ -970,12 +852,10 @@ defineComponent({
             font-weight: 500;
             font-size: 0.9rem;
             transition: color 0.3s;
-
             &:hover {
               color: var(--primary);
             }
           }
-
           .remember-me {
             font-size: 0.9rem;
             color: var(--muted-grey);
@@ -984,18 +864,14 @@ defineComponent({
         }
       }
     }
-
     .button-wrap {
       margin: 20px 0 0 0;
-
       &.has-help {
         display: flex;
         align-items: center;
-
         > span {
           margin-left: 12px;
           font-family: var(--font);
-
           a {
             color: var(--primary);
             font-weight: 500;
@@ -1003,46 +879,37 @@ defineComponent({
           }
         }
       }
-
       &.is-centered {
         margin-top: 40px;
         text-align: center;
-
         .button {
           min-width: 180px;
           margin-left: 0 !important;
         }
       }
-
       .button {
         height: 46px;
         width: 190px;
         margin-left: 6px;
-
         &:first-child {
           &:hover {
             opacity: 0.95;
             box-shadow: var(--primary-box-shadow);
           }
         }
-
         &:nth-child(2) {
           color: var(--dark-text);
           border-color: var(--placeholder);
         }
       }
     }
-
     .signup-type {
       display: flex;
       align-items: center;
-
       //margin-top: 16px;
-
       .box-wrap {
         width: 100%;
         position: relative;
-
         input {
           position: absolute;
           top: 0;
@@ -1051,14 +918,11 @@ defineComponent({
           height: 100%;
           opacity: 0;
           cursor: pointer;
-
           &:checked + .signup-box {
             border-color: var(--primary);
-
             i {
               color: var(--primary);
             }
-
             .meta {
               span:first-child {
                 color: var(--primary);
@@ -1066,7 +930,6 @@ defineComponent({
             }
           }
         }
-
         .signup-box {
           display: flex;
           align-items: center;
@@ -1075,24 +938,19 @@ defineComponent({
           border: 1px solid var(--fade-grey-dark-3);
           border-radius: var(--radius-large);
           transition: all 0.3s;
-
           i {
             font-size: 2rem;
             color: var(--muted-grey);
           }
-
           .meta {
             margin-left: 10px;
-
             span {
               display: block;
-
               &:first-child {
                 font-size: 0.85rem;
                 font-weight: 500;
                 color: var(--dark-text);
               }
-
               &:nth-child(2) {
                 font-size: 0.8rem;
                 color: var(--muted-grey);
@@ -1100,11 +958,9 @@ defineComponent({
             }
           }
         }
-
         &:first-child {
           margin-right: 6px;
         }
-
         &:nth-child(2) {
           margin-left: 6px;
         }
@@ -1112,37 +968,30 @@ defineComponent({
     }
   }
 }
-
 .signup-profile-wrapper {
   padding: 80px 60px 10px 60px;
-
   .title,
   .subtitle {
     text-align: center;
   }
-
   .title {
     font-family: var(--font-alt);
     font-size: 1.4rem;
   }
-
   .subtitle {
     font-family: var(--font);
     font-size: 1rem;
   }
-
   .picture-selector,
   .skill-picture-selector {
     width: 100%;
     text-align: center;
-
     .image-container {
       position: relative;
       width: 140px;
       height: 140px;
       margin: 10px auto;
       border-radius: var(--radius-rounded);
-
       img {
         width: 140px;
         height: 140px;
@@ -1151,7 +1000,6 @@ defineComponent({
         border: 4px solid #e8e8e8;
         margin-left: -1px;
       }
-
       .upload-button {
         position: absolute;
         bottom: 18px;
@@ -1167,11 +1015,9 @@ defineComponent({
         z-index: 5;
         transition: all 0.3s;
         cursor: pointer;
-
         &:hover {
           box-shadow: var(--light-box-shadow);
         }
-
         svg {
           height: 16px;
           width: 16px;
@@ -1181,28 +1027,22 @@ defineComponent({
     }
   }
 }
-
 .avatar-carousel {
   text-align: center;
   // max-width: 550px;
   // margin: 0 auto 20px auto;
-
   &:hover .slick-custom {
     opacity: 1;
   }
-
   .carousel-item {
     margin: 0 10px;
   }
-
   .image-wrapper {
     position: relative;
-
     &.is-smaller img {
       height: 70px;
       width: 70px;
     }
-
     img {
       height: 70px;
       width: 70px;
@@ -1211,22 +1051,18 @@ defineComponent({
       transition: all 0.3s;
     }
   }
-
   .tns-item {
     max-width: 120px;
     text-align: center;
     cursor: pointer;
-
     &:focus {
       outline: none !important;
     }
-
     img {
       opacity: 0.6;
       border: 4px solid transparent;
       transform: scale(0.75);
     }
-
     &.active {
       img {
         opacity: 1;
@@ -1235,16 +1071,13 @@ defineComponent({
       }
     }
   }
-
   .slick-dots {
     bottom: -60px !important;
   }
-
   .slick-prev::before,
   .slick-next::before {
     color: var(--muted-grey);
   }
-
   .slick-custom {
     position: absolute;
     top: calc(50% - 15px);
@@ -1261,86 +1094,69 @@ defineComponent({
     transition: all 0.3s;
     z-index: 25;
     opacity: 0;
-
     svg {
       height: 16px;
       width: 16px;
       color: var(--primary);
       transition: all 0.3s;
     }
-
     &:hover {
       border-color: var(--fade-grey-dark-4);
       color: var(--white);
       box-shadow: var(--light-box-shadow);
     }
-
     &.is-prev {
       left: -6px;
     }
-
     &.is-next {
       right: -6px;
     }
   }
 }
-
 .resize-handler {
   max-width: 200px;
   margin: 7px auto 10px auto;
 }
-
 .username-form {
   padding-top: 80px;
 }
-
 .is-dark {
   .signup-wrapper {
     background: var(--dark-sidebar-light-10);
   }
-
   .signup-steps {
     .steps-container {
       .progress {
         &::-webkit-progress-value {
           background: var(--primary);
         }
-
         &::-moz-progress-bar {
           background: var(--primary);
         }
-
         &::-ms-fill {
           background: var(--primary);
         }
       }
-
       .step-icon {
         background: var(--dark-sidebar-light-7);
-
         &.is-active {
           background: var(--dark-sidebar-light-16);
-
           .inner {
             background: var(--primary);
-
             svg {
               color: var(--white);
               stroke: var(--white);
             }
           }
-
           .step-label {
             color: var(--primary);
             opacity: 1;
           }
         }
-
         .inner {
           background: var(--dark-sidebar-light-9);
           border-color: var(--dark-sidebar-light-9);
         }
-
         .step-label {
           color: var(--dark-dark-text);
           opacity: 0.6;
@@ -1348,19 +1164,16 @@ defineComponent({
       }
     }
   }
-
   .hero {
     .signup-form {
       .control {
         .auth-label {
           color: var(--light-text);
         }
-
         .input {
           &:focus {
             background: var(--dark-sidebar-dark-4);
             border-color: var(--dark-sidebar-light-12);
-
             ~ .auth-label,
             ~ .auth-icon i {
               color: var(--primary);
@@ -1368,17 +1181,14 @@ defineComponent({
           }
         }
       }
-
       .signup-type {
         .box-wrap {
           input {
             &:checked + .signup-box {
               border-color: var(--primary);
-
               i {
                 color: var(--primary);
               }
-
               .meta {
                 span:first-child {
                   color: var(--primary);
@@ -1386,11 +1196,9 @@ defineComponent({
               }
             }
           }
-
           .signup-box {
             background-color: var(--dark-sidebar-light-2);
             border-color: var(--dark-sidebar-light-4);
-
             .meta {
               span:first-child {
                 color: var(--dark-dark-text);
@@ -1399,12 +1207,10 @@ defineComponent({
           }
         }
       }
-
       .button-wrap {
         &.has-help {
           > span {
             color: var(--light-text);
-
             a {
               color: var(--primary);
             }
@@ -1413,18 +1219,15 @@ defineComponent({
       }
     }
   }
-
   .signup-profile-wrapper {
     .picture-selector {
       .image-container {
         img {
           border-color: var(--dark-sidebar-light-10);
         }
-
         .upload-button {
           background-color: var(--dark-sidebar-light-2);
           border-color: var(--dark-sidebar-light-10);
-
           svg {
             color: var(--light-text);
             stroke: var(--light-text);
@@ -1433,7 +1236,6 @@ defineComponent({
       }
     }
   }
-
   .divider-container {
     .divider {
       span {
@@ -1444,7 +1246,6 @@ defineComponent({
       }
     }
   }
-
   .avatar-carousel {
     .slick-slide {
       &.slick-current {
@@ -1453,11 +1254,9 @@ defineComponent({
         }
       }
     }
-
     .slick-custom {
       background-color: var(--dark-sidebar-light-2);
       border-color: var(--dark-sidebar-light-10);
-
       &::before,
       &::after {
         color: var(--light-text);
@@ -1465,36 +1264,29 @@ defineComponent({
     }
   }
 }
-
 @media only screen and (max-width: 767px) {
   .steps-container {
     padding: 0 1rem;
   }
-
   .signup-wrapper {
     .card-bg {
       bottom: -75px;
     }
-
     .columns {
       padding: 0;
       text-align: center;
     }
-
     .signup-columns {
       max-width: 100vw;
     }
-
     .signup-subtitle {
       max-width: 330px;
       margin-left: auto;
       margin-right: auto;
     }
-
     .avatar-carousel .carousel-item {
       margin: 0;
     }
-
     .button-wrap {
       &.has-help {
         justify-content: center;
@@ -1502,28 +1294,23 @@ defineComponent({
     }
   }
 }
-
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .signup-wrapper {
     .card-bg {
       bottom: -75px;
     }
-
     .columns {
       padding: 0 80px;
       text-align: center;
     }
-
     .signup-columns {
       max-width: 100vw;
     }
-
     .signup-subtitle {
       max-width: 330px;
       margin-left: auto;
       margin-right: auto;
     }
-
     .button-wrap {
       &.has-help {
         justify-content: center;

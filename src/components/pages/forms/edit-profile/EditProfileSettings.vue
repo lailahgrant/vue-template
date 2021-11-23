@@ -50,6 +50,7 @@ const onSave = async () => {
               color="primary"
               raised
               :loading="isLoading"
+              :to="{ name: 'app-sidebar-layouts-profile-view' }"
               @click="onSave"
             >
               Save Changes

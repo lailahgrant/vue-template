@@ -75,6 +75,7 @@ const onSave = async () => {
               color="primary"
               raised
               :loading="isLoading"
+              :to="{ name: 'app-sidebar-layouts-profile-edit-settings' }"
               @click="onSave"
             >
               Save Changes

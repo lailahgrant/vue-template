@@ -112,8 +112,13 @@ export async function google() {
     const user = result.user;
       console.log(user)
       
+        // split displayName into Firstname and Lastname
+      const split_name = user.displayName.split(' ')
+
       const myUser = {
         name: user.displayName,
+        firstName: split_name[0],
+        lastName: split_name[1],
         email: user.email,
         photoURL: user.photoURL,
         userId: user.email,
@@ -124,9 +129,9 @@ export async function google() {
         const usersCollection = doc(db, `users/${user.email}`)
 
         const getUser = async (id) => {
-        const docRef = doc(db, `/users/${id}`)
-        const user = await getDoc(docRef)
-        return user.exists ? user.data() : null
+            const docRef = doc(db, `/users/${id}`)
+            const user = await getDoc(docRef)
+            return user.exists ? user.data() : null
         }
 
         return setDoc(usersCollection, myUser)

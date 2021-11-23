@@ -75,10 +75,19 @@ const onSave = async () => {
               color="primary"
               raised
               :loading="isLoading"
+              :to="{ name: 'app-sidebar-layouts-profile-edit-experience' }"
               @click="onSave"
             >
               Save Changes
             </VButton>
+            <!-- <VButton
+              color="primary"
+              raised
+              :loading="isLoading"
+              :to="{ name: 'app-sidebar-layouts-profile-edit-experience' }"
+            >
+              Save Changes
+            </VButton> -->
           </div>
         </div>
       </div>
@@ -557,33 +566,9 @@ const onSave = async () => {
             </VField>
           </div>
 
-          <!-- CV Field -->
-          <div class="column is-12">
-            <p>Please Upload your Certificate</p>
-            <VField grouped>
-              <VControl>
-                <div class="file  is-success">
-                  <label class="file-label">
-                    <input class="file-input" type="file" name="resume" />
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                      </span>
-                      <span class="file-label"> Upload your Certificate...</span>
-                    </span>
-                    <span class="file-name light-text">
-                      freelancer_certificate.pdf
-                    </span>
-                  </label>
-                </div>
-              </VControl>
-            </VField>
-          </div>
-
         </div>
+
       </div>
-
-
 
       <!--Fieldset-->
       <div class="fieldset">
