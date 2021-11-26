@@ -221,7 +221,7 @@ const onSave = async () => {
 
           <template v-else>
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <VIconWrap
                 picture="/images/icons/flags/united-states-of-america.svg"
               />
@@ -233,10 +233,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <VIconWrap picture="/images/icons/flags/france.svg" />
 
               <div class="meta">
@@ -246,10 +246,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <VIconWrap picture="/images/icons/flags/germany.svg" />
 
               <div class="meta">
@@ -259,10 +259,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <VIconWrap picture="/images/icons/flags/spain.svg" />
 
               <div class="meta">
@@ -272,7 +272,7 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Create Item-->
             <div class="setting-item is-create">

@@ -161,3 +161,7 @@ cypress/videos
 # sonarqube
 
 .scannerwork
+
+
+#firebase config file
+firebase.js

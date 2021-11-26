@@ -194,11 +194,11 @@ const onSave = async () => {
                 </div>
               </div>
             </div>
-          </form>
+          </form>  <!--Work experience-->
 
           <template v-else>
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/airbnb.svg"
                 alt=""
@@ -216,10 +216,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/facebook.svg"
                 alt=""
@@ -237,10 +237,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/atlassian.svg"
                 alt=""
@@ -258,10 +258,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/github.svg"
                 alt=""
@@ -279,10 +279,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/slack.svg"
                 alt=""
@@ -300,10 +300,10 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Experience Item-->
-            <div class="setting-item">
+            <!-- <div class="setting-item">
               <img
                 src="/demo/photos/brands/gitlab.svg"
                 alt=""
@@ -321,7 +321,7 @@ const onSave = async () => {
               <div class="end">
                 <EditSettingItemDropdown />
               </div>
-            </div>
+            </div> -->
 
             <!--Create Item-->
             <div class="setting-item is-create">
@@ -344,8 +344,8 @@ const onSave = async () => {
               </div>
             </div>
           </template>
-        </div>
-      </div>
+        </div>  <!--Form-->
+      </div> <!--Fieldset-->
     </div>
   </div>
 </template>

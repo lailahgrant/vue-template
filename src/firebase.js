@@ -40,8 +40,8 @@ const usersCollection = collection(db, '/users')
 //createUser fn to add users to the users collection
 export const createUser = (user) => {
     const db = getFirestore()
-    const usersCollection = doc(db, `users/${user.email}`)
-    //     const usersCollection = doc(db, 'users/user')
+    //const usersCollection = doc(db, `users/${user.email}`)
+    const usersCollection = doc(db, 'users/user')
     console.log(user)
     return setDoc(usersCollection, user)
 }
