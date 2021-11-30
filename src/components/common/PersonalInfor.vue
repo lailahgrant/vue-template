@@ -1,6 +1,6 @@
 <script lang="ts">
 import { ref, onMounted, watchEffect,  reactive, defineProps } from 'vue'
-// import { createUser } from '../../firebase'
+import { createUser } from '../../firebase'
 export default {
   props: { data: Object },
   setup(props) {
@@ -19,6 +19,7 @@ export default {
     const form = ref({
       firstName: '',
       lastName: '',
+      email: '',
       job: '',
       location: '',
       bio: '',
@@ -42,14 +43,15 @@ export default {
     }
 
     //store infor in database
-        //   const onSubmit = async () => {
-        //     await createUser({ ...form })
-        //     form.value.firstName = ''
-        //     form.value.lastName = ''
-        //     form.value.location = ''
-        //     form.value.job =  ''
-        //     form.value.bio = ''
-        // }
+          const onSubmit = async () => {
+            await createUser({ ...form.value })
+            form.value.firstName = ''
+            form.value.lastName = ''
+            form.value.email = ''
+            form.value.location = ''
+            form.value.job =  ''
+            form.value.bio = ''
+        }
 
     onMounted(() => {
       if (props.data != undefined && props.data != null) {
@@ -84,7 +86,7 @@ export default {
     */
         getPersonalInfor, 
 
-        // onSubmit,
+        onSubmit,
     }
   },
 }
@@ -122,6 +124,20 @@ export default {
               class="input"
               placeholder="Last Name"
               autocomplete="family-name"
+            />
+          </VControl>
+        </VField>
+      </div>
+      <!--Field-->
+      <div class="column is-12">
+        <VField>
+          <VControl icon="feather:inbox">
+            <input
+              v-model="form.email"
+              type="email"
+              class="input"
+              placeholder="Email"
+              autocomplete="organization-title"
             />
           </VControl>
         </VField>
@@ -174,7 +190,9 @@ export default {
       <div class="column is-12">
             <VField>
               <VControl>
-                <VButton color="primary" raised fullwidth>
+                <VButton color="primary" raised fullwidth
+                @click ="onSubmit"
+                >
                   Add Personal Information
                 </VButton>
               </VControl>

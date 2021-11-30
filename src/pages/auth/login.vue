@@ -15,6 +15,10 @@ const notif = useNotyf()
 const userSession = useUserSession()
 const redirect = route.query.redirect as string
 
+const handleLoginGoogle = async () => {
+  
+}
+
 const handleLogin = async () => {
   if (!isLoading.value) {
     isLoading.value = true
@@ -26,7 +30,7 @@ const handleLogin = async () => {
     // notif.success('Welcome back, Erik Kovalsky')
 
     if (redirect) {
-      router.push(redirect)
+      router.push({ name: redirect })
     } else {
       router.push({
         name: 'app',
@@ -164,17 +168,24 @@ useHead({
                         > -->
 
                         <VButton
-                          :to="{ name: 'app-sidebar-layouts-profile-edit'}"
                           :loading="isLoading"
                           color="primary"
                           type="submit"
                           bold
                           fullwidth
                           raised
-                        >                        
+                        >
                           Sign In
                         </VButton>
                       </VControl>
+
+                      <div>
+                        <p>OR</p>
+                      </div>
+
+                      <VButton color="primary" outlined fullwidth>
+                        Sign in Google
+                      </VButton>
 
                       <div class="forgot-link has-text-centered">
                         <a>Forgot Password?</a>

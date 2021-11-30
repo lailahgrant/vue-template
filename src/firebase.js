@@ -39,11 +39,20 @@ const usersCollection = collection(db, '/users')
 
 //createUser fn to add users to the users collection
 export const createUser = (user) => {
-    const db = getFirestore()
-    //const usersCollection = doc(db, `users/${user.email}`)
-    const usersCollection = doc(db, 'users/user')
-    console.log(user)
-    return setDoc(usersCollection, user)
+  const db = getFirestore()
+
+  //saves data with field of undefined
+  //const usersCollection = doc(db, `users/${user.value}`)
+
+  //saves personal infor to database under the field of personal_info
+  //const usersCollection = doc(db, 'users/personal_info')
+
+    //saves personal_info to database under the email as a unique field
+    const usersCollection = doc(db, `users/${user.email}`)
+    
+  //const usersCollection = doc(db, 'users/user')
+  console.log(user)
+  return setDoc(usersCollection, user)
 }
 
 //getUser fn, accepts  user's  id and return the documentation if it exists
@@ -137,11 +146,11 @@ export async function google() {
         return setDoc(usersCollection, myUser)
     // ...
   }).catch((error) => {
-    // Handle Errors here.c
+    // Handle Errors here
     const errorCode = error.code;
     const errorMessage = error.message;
     // The email of the user's account used.
-    const email = error.email;
+    const email = error.email;  
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
@@ -154,7 +163,8 @@ export async function google() {
 
 
 
-//  ///** Login**/
+
+/** Login**/
 export async function useLogin(){
 
 

@@ -71,11 +71,14 @@ useHead({
                   modo ne improbos quidem.
                 </h3>
                 <div class="buttons">
-                  <VButton color="primary" bold rounded raised>
-                    Get Started
+                  <VButton color="primary" bold rounded raised 
+                      :to="{name:'auth-login', query: {redirect:'app-sidebar-layouts-profile-edit'}}">
+                    Become a Freelancer
                   </VButton>
-                  <VButton color="primary" outlined bold rounded raised>
-                    14-day Trial
+                  <VButton color="primary" outlined bold rounded raised
+                    :to="{name: 'auth-login', query: {redirect: 'app-sidebar-layouts-hire'}}"
+                  >
+                    Hire a Freelancer
                   </VButton>
                 </div>
               </div>
