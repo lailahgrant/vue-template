@@ -8,6 +8,9 @@ import { useUserSession } from '/@src/stores/userSession'
 import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
 
+import { watch, defineComponent } from "vue"
+import {  user, google, useLogin} from "../../firebase" 
+
 const isLoading = ref(false)
 const router = useRouter()
 const route = useRoute()
@@ -40,6 +43,42 @@ const handleLogin = async () => {
     isLoading.value = false
   }
 }
+
+
+defineComponent({
+    props: {
+        // loginReturnUrl : { type: String, default: "/" }
+        // pic,
+        // email,
+        // dname
+    },
+    setup(props){
+        watch(
+            () => user.value,
+            newUser => {
+              console.log(user.value)
+              /*if(user.value != null){
+                  const userObj = {
+                  name: user.value.displayName || null,
+                  email: user.value.email,
+              }
+              }*/
+             
+                if(newUser) {
+                    // router.push(props.loginReturnUrl)
+                }
+                /* props.pic = `<img src="${user.displayName}" />`
+                props.dname  = `<h1>${user.displayName}</h1>` */
+            }
+        );
+        return {
+            ...useLogin(),
+            google,
+        };
+    },
+    
+});
+
 
 useHead({
   title: 'Auth Login - Vuero',
@@ -180,10 +219,10 @@ useHead({
                       </VControl>
 
                       <div>
-                        <p>OR</p>
+                        <p style="text-align:center;">OR</p>
                       </div>
 
-                      <VButton color="primary" outlined fullwidth>
+                      <VButton icon="lni-night" color="primary" outlined fullwidth @click="google">
                         Sign in Google
                       </VButton>
 
