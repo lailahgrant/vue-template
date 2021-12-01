@@ -165,3 +165,6 @@ cypress/videos
 
 #firebase config file
 firebase.js
+
+
+.env.development
