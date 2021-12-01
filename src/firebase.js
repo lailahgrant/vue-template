@@ -21,13 +21,13 @@ import {
 } from 'firebase/auth'
 
 const config = {
-    apiKey: 'AIzaSyD_dJc7HgTIKgBy1KhMWsIbvOzJ6UjqXpw',
-    authDomain: 'freelance-app-f7696.firebaseapp.com',
-    projectId: 'freelance-app-f7696',
-    storageBucket: 'freelance-app-f7696.appspot.com',
-    messagingSenderId: '686332306013',
-    appId: '1:686332306013:web:84d210d3ae06d6b73ee3b4',
-    measurementId: 'G-2G5PBMD72G',
+  apiKey: 'process.env.VUE_APP_FIREBASE_API_KEY',
+  authDomain: 'process.env.VUE_APP_FIREBASE_AUTH_DOMAIN',
+  projectId: 'process.env.VUE_APP_FIREBASE_PROJECT_ID',
+  storageBucket: 'process.env.VUE_APP_FIREBASE_STORAGE_BUCKET',
+  messagingSenderId: 'process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID',
+  appId: 'process.env.VUE_APP_FIREBASE_APP_ID',
+  measurementId: 'process.env.VUE_APP_FIREBASE_MEASUREMENT_ID',
 }
 
 initializeApp(config)
