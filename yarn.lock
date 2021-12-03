@@ -2692,7 +2692,7 @@
     "@vue/compiler-dom" "3.2.19"
     "@vue/shared" "3.2.19"
 
-"@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.14", "@vue/devtools-api@^6.0.0-beta.15", "@vue/devtools-api@^6.0.0-beta.18":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.14", "@vue/devtools-api@^6.0.0-beta.15", "@vue/devtools-api@^6.0.0-beta.18":
   "integrity" "sha512-ObzQhgkoVeoyKv+e8+tB/jQBL2smtk/NmC9OmFK8UqdDpoOdv/Kf9pyDWL+IFyM7qLD2C75rszJujvGSPSpGlw=="
   "resolved" "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.0.0-beta.19.tgz"
   "version" "6.0.0-beta.19"
@@ -12072,7 +12072,7 @@
   dependencies:
     "vscode-vue-languageservice" "^0.27.0"
 
-"vue@^2.5.17 || ^2.6", "vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.x", "vue@> 3.0.0", "vue@>=3", "vue@2 || 3", "vue@3.2.19":
+"vue@^2.5.17 || ^2.6", "vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.0.2", "vue@^3.x", "vue@> 3.0.0", "vue@>=3", "vue@2 || 3", "vue@3.2.19":
   "integrity" "sha512-6KAMdIfAtlK+qohTIUE4urwAv4A3YRuo8uAbByApUmiB0CziGAAPs6qVugN6oHPia8YIafHB/37K0O6KZ7sGmA=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.19.tgz"
   "version" "3.2.19"
@@ -12087,6 +12087,13 @@
   "integrity" "sha512-96qP8JDqB9vwU7bkG5nVU+E0UGQn7yYQVqUUCLQMYWDuQyu2vE77H/UFZ1yI+hwzlSTBKT9BqnNG8JsFegB3eg=="
   "resolved" "https://registry.npmjs.org/vue3-apexcharts/-/vue3-apexcharts-1.4.1.tgz"
   "version" "1.4.1"
+
+"vuex@^4.0.2":
+  "integrity" "sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q=="
+  "resolved" "https://registry.npmjs.org/vuex/-/vuex-4.0.2.tgz"
+  "version" "4.0.2"
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
 
 "webidl-conversions@^3.0.0":
   "integrity" "sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE="

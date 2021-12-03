@@ -110,6 +110,7 @@
     "vue-scrollto": "2.20.0",
     "vue-tippy": "6.0.0-alpha.33",
     "vue3-apexcharts": "1.4.1",
+    "vuex": "^4.0.2",
     "yup": "0.32.9"
   },
   "devDependencies": {

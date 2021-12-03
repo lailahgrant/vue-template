@@ -9,7 +9,7 @@ import useNotyf from '/@src/composable/useNotyf'
 import sleep from '/@src/utils/sleep'
 
 import { watch, defineComponent } from "vue"
-import {  user, google, useLogin} from "../../firebase" 
+import {  user, google, registerUser, useLogin} from "../../firebase" 
 
 const isLoading = ref(false)
 const router = useRouter()

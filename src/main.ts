@@ -16,12 +16,16 @@ import { createApp } from './app'
 // import firebase.js file
 import './firebase'
 
+// import store
+import  store  from './store/index'
+
 /**
  * We create our app and mount it when it is ready
  *
  * @see /@src/app.ts for more detailed informations
  */
 createApp({
+  
   async enhanceApp(app) {
     // Lazy load aditional components
     const VCalendar = (await import('v-calendar')).default
@@ -51,5 +55,6 @@ createApp({
   },
 }).then(async ({ app, router }) => {
   await router.isReady()
-  app.mount('#app')
+  // app.mount('#app')
+  app.use(store).mount('#app')
 })

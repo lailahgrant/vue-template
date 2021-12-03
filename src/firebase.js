@@ -96,7 +96,7 @@ export const initialised = ref(false)
 export const user = ref(null);
 //export const user = ref<any>(null);
 
-const authent = getAuth();
+export const authent = getAuth();
 
 authent.onAuthStateChanged((u) => {
     user.value = u;
@@ -162,9 +162,45 @@ export async function google() {
     //  SHOW USER  DETAILS
 
 
+// Signup with Email and Password
+export async function registerUser() {
+  createUserWithEmailAndPassword(authent, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      // ...
+      console.log(user)
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      // ..
+    })
+}
 
 
-/** Login**/
+/**
+ * SignIn with email and password
+ */
+export const email = ref(null)
+export const password = ref(null)
+export async function signIn() {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+    })
+
+}
+
+
+
+/** Login **/
 export async function useLogin(){
 
 

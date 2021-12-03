@@ -11,7 +11,8 @@ import { useViaPlaceholderError } from '/@src/composable/useViaPlaceholderError'
 import sleep from '/@src/utils/sleep'
 import useNotyf from '/@src/composable/useNotyf'
 import { watch, defineComponent } from "vue"
-import {  user, google, useLogin} from "../../firebase" 
+import {  createUser, user, google, registerUser, useLogin} from "../../firebase" 
+import {useStore} from 'vuex'
 let slider: TinySliderInstance
 const sliderElement = ref<HTMLElement>()
 const router = useRouter()
@@ -79,6 +80,8 @@ onMounted(() => {
     slider.events.on('indexChanged', onAvatarChanged)
     onAvatarChanged(slider.getInfo())
   }
+
+        
 })
 onUnmounted(() => {
   if (slider) {
@@ -92,6 +95,7 @@ defineComponent({
         // pic,
         // email,
         // dname
+
     },
     setup(props){
         watch(
@@ -110,15 +114,58 @@ defineComponent({
                 }
                 /* props.pic = `<img src="${user.displayName}" />`
                 props.dname  = `<h1>${user.displayName}</h1>` */
-            }
+            },  
+
         );
+
+            // SIGNUP AUTH
+    //     const userData = ref({
+    //       firstname: '',
+    //       lastname: '',
+    //       email: '',
+    //       password: ''
+    //     })
+
+    //     const getPersonalInfor = () => {
+      
+    //   return userData
+    // }
+
+    //     const signUp = async () => {
+          
+    //       await createUser({...userData.value})
+    //         userData.value.firstname = ''
+    //         userData.value.lastname = ''
+    //         userData.value.email = ''
+    //         userData.value.password = ''
+    //     }
+
+    //       userData.value = {
+    //       ...userData.value,
+    //     }
+
+
+      /**
+       * ACCESS the STORE
+       */
+      const store = useStore()
+      console.log(store.state.user)
+      //commit a new mutation
+      store.commit('setUser', 'Lailah')
+
         return {
+            // signUp,
             ...useLogin(),
             google,
+            registerUser,
+            // getPersonalInfor,
         };
     },
+
+
     
 });
+
 </script>
 
 <template>
@@ -200,9 +247,10 @@ defineComponent({
                   And simply join an unmatched design experience.
                 </h2>
                 <div class="signup-card">
-                  <form class="signup-form is-mobile-spaced" @submit.prevent>
+                  <form class="signup-form is-mobile-spaced" @submit.prevent="registerUser">
                     <div class="columns is-multiline">
-                      <div class="column is-6">
+                            <!--  v-model="userData.firstname" -->
+                      <div class="column is-6"> 
                         <VField>
                           <VControl>
                             <input
@@ -226,7 +274,7 @@ defineComponent({
                           </VControl>
                         </VField>
                       </div>
-                      <div class="column is-12">
+                      <div class="column is-6">
                         <VField>
                           <VControl>
                             <input
@@ -238,37 +286,18 @@ defineComponent({
                           </VControl>
                         </VField>
                       </div>
-                      <!-- <div class="column is-12">
-                        <div class="signup-type">
-                          <div class="box-wrap" >
-                            <input type="radio" name="signup_type" checked />
-                            <div class="signup-box">
-                              <i
-                                aria-hidden="true"
-                                class="lnil lnil-coffee-cup"
-                              ></i>
-                              <div class="meta">
-                                <span>Developer</span>
-                                <span>Sign up with Google to get started</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="box-wrap">
-                            <input type="radio" name="signup_type" />
-                            <div class="signup-box">
-                              <i
-                                aria-hidden="true"
-                                class="lnil lnil-crown-alt-1"
-                              ></i>
-                              <div class="meta">
-                                <span>Hire Company</span>
-                                <span>Sign up  with Google to get started</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="column is-6">
+                        <VField>
+                          <VControl>
+                            <input
+                              type="password"
+                              class="input"
+                              autocomplete="password"
+                            />
+                            <div class="auth-label">Password</div>
+                          </VControl>
+                        </VField>
                       </div>
-                    </div> -->
 
                     <div class="control is-agree">
                       <span>
@@ -297,6 +326,7 @@ defineComponent({
                         fullwidth
                         rounded
                         :to="{ name: 'auth-login' }"
+                        @click="registerUser"
                       >
                         Sign Up
                       </VButton>
