@@ -1,3 +1,67 @@
+<script>
+import {ref, onMounted} from 'vue'
+import {  createUser, user, google, registerUser, useLogin} from "../../firebase"
+import {useStore} from 'vuex'
+
+
+    export default {
+      props: { data: Object },
+        setup(props){
+        /**
+       * ACCESS the STORE
+       */
+        const store = useStore()
+        console.log(store.state.user)
+      //commit a new mutation
+        store.commit('setUser', 'Lailah')
+
+        // SIGNUP AUTH
+         const userData = ref({
+           firstname: '',
+           lastname: '',
+           email: '',
+           password: ''
+         })
+
+         const getPersonalInfor = () => {
+      
+       return userData
+     }
+
+         const signUp = async () => {
+          await registerUser()
+           await createUser({...userData.value})
+           userData.value.firstname = ''
+           userData.value.lastname = ''
+           userData.value.email = ''
+           userData.value.password = ''
+        }
+
+        onMounted(() => {
+      if (props.data != undefined && props.data != null) {
+        form.value = {
+          ...form.value,
+          ...props.data,
+        }
+
+        //return stuff to use in the template
+        return{
+          google,
+          registerUser,
+          signUp,
+          getPersonalInfor
+        }
+
+    }
+    })
+
+  },
+
+}
+
+
+</script>
+
 <template>
 
  <div class="column is-8 is-offset-1">
@@ -9,6 +73,7 @@
                         <VField>
                           <VControl>
                             <input
+                            v-model="userData.value.firstname"
                               type="text"
                               class="input"
                               autocomplete="given-name"
@@ -69,7 +134,6 @@
                         bold
                         fullwidth
                         rounded
-                        :to="{ name: 'auth-login' }"
                         @click="registerUser"
                       >
                         Sign Up
@@ -102,19 +166,3 @@
 
 </template>
 
-<script>
-import {useStore} from 'vuex'
-
-    export default {
-        setup(){
-        /**
-       * ACCESS the STORE
-       */
-        const store = useStore()
-        console.log(store.state.user)
-      //commit a new mutation
-        store.commit('setUser', 'Lailah')
-    }
-    }
-
-</script>

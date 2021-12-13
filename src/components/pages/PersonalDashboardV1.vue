@@ -170,7 +170,7 @@ import { profitChartOptions } from '/@src/data/dashboards/personal-v1/profitChar
 </template>
 
 <style lang="scss">
-@import '../../../../scss/abstracts/_mixins.scss';
+@import '../../scss/abstracts/_mixins.scss';
 
 .is-navbar {
   .personal-dashboard {
